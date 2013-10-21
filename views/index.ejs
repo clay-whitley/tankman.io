@@ -37,13 +37,13 @@
     </script>
   </head>
   <body>
-    <div id="chatBox">
-      <table id="messages" style="height:300px; width: 80%; border: 1px solid black;">
+    <div id="chatBox" style="height:150px; width: 80%; border: 1px solid black; overflow: scroll;">
+      <table id="messages">
       </table>
-      <form action="/" id="chatForm">
-        <input type="text" name="message" id="messageForm">
-        <input type="submit" value="Send">
-      </form>
     </div>
+    <form action="/" id="chatForm">
+      <input type="text" name="message" id="messageForm">
+      <input type="submit" value="Send">
+    </form>
   </body>
 </html>
