@@ -36,8 +36,19 @@ app.get('/', routes.index);
 app.get('/users', user.list);
 
 io.sockets.on('connection', function(socket){
-  socket.emit('handshake', {content: 'handshake from server'});
-  socket.on('clientHandshake', function(data){
-    console.log(data);
+
+  socket.on('identify', function(identity){
+    socket.set('identity', identity, function(){
+      socket.emit('identified');
+    });
+  });
+
+  socket.on('message', function(data){
+    socket.get('identity', function(err, name){
+      socket.broadcast.emit('sentMessage', {
+        sender: name,
+        content: data
+      });
+    });
   });
 });
