@@ -3,10 +3,11 @@
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="/javascripts/cookies.js"></script>
+    <script src="/javascripts/game_canvas.js"></script>
     <script src="/javascripts/chat.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script>
       var socket = io.connect('http://localhost');
       $(document).ready(function(){
@@ -25,6 +26,8 @@
           $('#messageForm').val('');
           renderMessage({sender: readCookie('identity'), message: message});
         });
+
+        gameInit();
       });
 
       socket.on('identified', function(){
@@ -37,6 +40,7 @@
     </script>
   </head>
   <body>
+    <canvas width="500" height="350" id="game"></canvas>
     <div id="chatBox" style="height:150px; width: 80%; border: 1px solid black; overflow: scroll;">
       <table id="messages">
       </table>
