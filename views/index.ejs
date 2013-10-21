@@ -27,7 +27,10 @@
           renderMessage({sender: readCookie('identity'), message: message});
         });
 
-        gameInit();
+        var gameContext = gameInit();
+        var board = new Board();
+        var player = new Player({board: board});
+        player.render(gameContext);
       });
 
       socket.on('identified', function(){
