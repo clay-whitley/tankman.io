@@ -47,7 +47,7 @@ io.sockets.on('connection', function(socket){
     socket.get('identity', function(err, name){
       socket.broadcast.emit('sentMessage', {
         sender: name,
-        content: data
+        message: data
       });
     });
   });

@@ -5,6 +5,7 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <script src="/socket.io/socket.io.js"></script>
     <script src="/javascripts/cookies.js"></script>
+    <script src="/javascripts/chat.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script>
       var socket = io.connect('http://localhost');
@@ -19,20 +20,28 @@
 
         $('#chatForm').on('submit', function(e){
           e.preventDefault();
-          socket.emit('message', $(this).find('input#message').val())
-          $('#message').val('');
+          var message = $(this).find('input#messageForm').val()
+          socket.emit('message', message)
+          $('#messageForm').val('');
+          renderMessage({sender: readCookie('identity'), message: message});
         });
       });
 
       socket.on('identified', function(){
         console.log('identified');
       });
+
+      socket.on('sentMessage', function(data){
+        renderMessage(data);
+      });
     </script>
   </head>
   <body>
-    <div style="height:300px; width: 80%; border: 1px solid black;" id="chatBox">
+    <div id="chatBox">
+      <table id="messages" style="height:300px; width: 80%; border: 1px solid black;">
+      </table>
       <form action="/" id="chatForm">
-        <input type="text" name="message" id="message">
+        <input type="text" name="message" id="messageForm">
         <input type="submit" value="Send">
       </form>
     </div>
