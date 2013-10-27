@@ -2,19 +2,6 @@ function gameInit(){
   var canvas = document.getElementById('game');
   var context = canvas.getContext('2d');
 
-  for (var x = 0.5; x < 500; x += 50) {
-    context.moveTo(x, 0);
-    context.lineTo(x, 300);
-  }
-
-  for (var y = 0.5; y < 350; y += 50) {
-    context.moveTo(0, y);
-    context.lineTo(500, y);
-  }
-
-  context.strokeStyle = "#000";
-  context.stroke();
-
   return context;
 }
 
@@ -43,9 +30,6 @@ Board.prototype.calculatePixels = function(coords){
   return result;
 };
 
-Board.prototype.reset = function(object){
-  // removes object from it's previous coordinates
-};
 
 // Player Class
 
@@ -65,6 +49,8 @@ Player.prototype.render = function(context){
   this.board.reset(this);
 };
 
+// Key listeners
+
 var keysDown = {};
 
 addEventListener("keydown", function (e) {
@@ -74,6 +60,8 @@ addEventListener("keydown", function (e) {
 addEventListener("keyup", function (e) {
   delete keysDown[e.keyCode];
 }, false);
+
+// Game loop functions
 
 // Update game objects
 function update(modifier) {
@@ -92,6 +80,7 @@ function update(modifier) {
 }
 
 function draw(){
+  context.clearRect(0,0, 500, 300);
   // draw background
   // draw enemies
   // draw player
@@ -112,3 +101,39 @@ function mainLoop() {
 var FPS = 30;
 
 setInterval(mainLoop, 1000/FPS);
+
+// Game initialization
+
+var context = gameInit();
+
+var socket = io.connect('http://localhost');
+      $(document).ready(function(){
+        if (readCookie('identity')){
+          var identity = readCookie('identity')
+        } else {
+          var identity = prompt("Enter name:");
+          createCookie('identity', identity);
+        }
+        socket.emit('identify', identity);
+
+        $('#chatForm').on('submit', function(e){
+          e.preventDefault();
+          var message = $(this).find('input#messageForm').val()
+          socket.emit('message', message)
+          $('#messageForm').val('');
+          renderMessage({sender: readCookie('identity'), message: message});
+        });
+
+        var gameContext = gameInit();
+        var board = new Board();
+        var player = new Player({board: board});
+        player.render(gameContext);
+      });
+
+      socket.on('identified', function(){
+        console.log('identified');
+      });
+
+      socket.on('sentMessage', function(data){
+        renderMessage(data);
+      });
