@@ -64,3 +64,51 @@ Player.prototype.render = function(context){
   // resets previous grid square to prior state
   this.board.reset(this);
 };
+
+var keysDown = {};
+
+addEventListener("keydown", function (e) {
+  keysDown[e.keyCode] = true;
+}, false);
+
+addEventListener("keyup", function (e) {
+  delete keysDown[e.keyCode];
+}, false);
+
+// Update game objects
+function update(modifier) {
+  if (38 in keysDown) { // Player holding up
+    hero.y -= hero.speed * modifier;
+  }
+  if (40 in keysDown) { // Player holding down
+    hero.y += hero.speed * modifier;
+  }
+  if (37 in keysDown) { // Player holding left
+    hero.x -= hero.speed * modifier;
+  }
+  if (39 in keysDown) { // Player holding right
+    hero.x += hero.speed * modifier;
+  }
+}
+
+function draw(){
+  // draw background
+  // draw enemies
+  // draw player
+  // draw explosives
+  // draw explosions
+}
+
+function mainLoop() {
+  var now = Date.now();
+  var delta = now - then;
+
+  update(delta / 1000);
+  draw();
+
+  then = now;
+}
+
+var FPS = 30;
+
+setInterval(mainLoop, 1000/FPS);
