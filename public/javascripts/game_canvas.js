@@ -1,8 +1,10 @@
 function gameInit(){
-  var canvas = document.getElementById('game');
-  var context = canvas.getContext('2d');
 
-  return context;
+  game.canvas = document.createElement("canvas");
+  game.context = game.canvas.getContext("2d");
+  game.canvas.width = 900;
+  game.canvas.height = 300;
+  $('body').prepend(game.canvas);
 }
 
 function getRandomColor() {
@@ -76,7 +78,7 @@ function update(modifier) {
 }
 
 function draw(){
-  game.context.clearRect(0,0, 500, 300);
+  game.context.clearRect(0,0, game.canvas.width, game.canvas.height);
   // draw background
   // draw enemies
   game.player.draw(game.context);
@@ -119,7 +121,7 @@ $(document).ready(function(){
     renderMessage({sender: readCookie('identity'), message: message});
   });
 
-  game.context = gameInit();
+  gameInit();
   game.player = new Player();
   then = Date.now();
   setInterval(mainLoop, 1000/FPS);
