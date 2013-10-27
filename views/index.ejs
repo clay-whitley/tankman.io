@@ -3,44 +3,11 @@
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="/javascripts/jquery.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="/javascripts/cookies.js"></script>
     <script src="/javascripts/game_canvas.js"></script>
     <script src="/javascripts/chat.js"></script>
-    <script>
-      var socket = io.connect('http://localhost');
-      $(document).ready(function(){
-        if (readCookie('identity')){
-          var identity = readCookie('identity')
-        } else {
-          var identity = prompt("Enter name:");
-          createCookie('identity', identity);
-        }
-        socket.emit('identify', identity);
-
-        $('#chatForm').on('submit', function(e){
-          e.preventDefault();
-          var message = $(this).find('input#messageForm').val()
-          socket.emit('message', message)
-          $('#messageForm').val('');
-          renderMessage({sender: readCookie('identity'), message: message});
-        });
-
-        var gameContext = gameInit();
-        var board = new Board();
-        var player = new Player({board: board});
-        player.render(gameContext);
-      });
-
-      socket.on('identified', function(){
-        console.log('identified');
-      });
-
-      socket.on('sentMessage', function(data){
-        renderMessage(data);
-      });
-    </script>
   </head>
   <body>
     <canvas width="500" height="350" id="game"></canvas>

@@ -36,17 +36,13 @@ Board.prototype.calculatePixels = function(coords){
 function Player(opts){
   this.coords = [0,0];
   this.color = getRandomColor();
-  this.board = opts.board;
+  // 100 px per second
+  this.speed = 100;
 }
 
-Player.prototype.render = function(context){
-  // returns area in format [x, y, width, height]
-  var area = this.board.calculatePixels(this.coords);
+Player.prototype.draw = function(context){
   context.fillStyle = this.color;
-  context.fillRect(area[0], area[1], area[2], area[3]);
-
-  // resets previous grid square to prior state
-  this.board.reset(this);
+  context.fillRect(this.coords[0], this.coords[1], 50, 50);
 };
 
 // Key listeners
@@ -66,24 +62,24 @@ addEventListener("keyup", function (e) {
 // Update game objects
 function update(modifier) {
   if (38 in keysDown) { // Player holding up
-    hero.y -= hero.speed * modifier;
+    game.player.coords[1] -= game.player.speed * modifier;
   }
   if (40 in keysDown) { // Player holding down
-    hero.y += hero.speed * modifier;
+    game.player.coords[1] += game.player.speed * modifier;
   }
   if (37 in keysDown) { // Player holding left
-    hero.x -= hero.speed * modifier;
+    game.player.coords[0] -= game.player.speed * modifier;
   }
   if (39 in keysDown) { // Player holding right
-    hero.x += hero.speed * modifier;
+    game.player.coords[0] += game.player.speed * modifier;
   }
 }
 
 function draw(){
-  context.clearRect(0,0, 500, 300);
+  game.context.clearRect(0,0, 500, 300);
   // draw background
   // draw enemies
-  // draw player
+  game.player.draw(game.context);
   // draw explosives
   // draw explosions
 }
@@ -100,40 +96,41 @@ function mainLoop() {
 
 var FPS = 30;
 
-setInterval(mainLoop, 1000/FPS);
-
 // Game initialization
 
-var context = gameInit();
+var game = {};
 
 var socket = io.connect('http://localhost');
-      $(document).ready(function(){
-        if (readCookie('identity')){
-          var identity = readCookie('identity')
-        } else {
-          var identity = prompt("Enter name:");
-          createCookie('identity', identity);
-        }
-        socket.emit('identify', identity);
 
-        $('#chatForm').on('submit', function(e){
-          e.preventDefault();
-          var message = $(this).find('input#messageForm').val()
-          socket.emit('message', message)
-          $('#messageForm').val('');
-          renderMessage({sender: readCookie('identity'), message: message});
-        });
+$(document).ready(function(){
+  if (readCookie('identity')){
+    var identity = readCookie('identity');
+  } else {
+    var identity = prompt("Enter name:");
+    createCookie('identity', identity);
+  }
+  socket.emit('identify', identity);
 
-        var gameContext = gameInit();
-        var board = new Board();
-        var player = new Player({board: board});
-        player.render(gameContext);
-      });
+  $('#chatForm').on('submit', function(e){
+    e.preventDefault();
+    var message = $(this).find('input#messageForm').val();
+    socket.emit('message', message);
+    $('#messageForm').val('');
+    renderMessage({sender: readCookie('identity'), message: message});
+  });
 
-      socket.on('identified', function(){
-        console.log('identified');
-      });
+  game.context = gameInit();
+  game.player = new Player();
+  then = Date.now();
+  setInterval(mainLoop, 1000/FPS);
+});
 
-      socket.on('sentMessage', function(data){
-        renderMessage(data);
-      });
+socket.on('identified', function(){
+  console.log('identified');
+});
+
+socket.on('sentMessage', function(data){
+  renderMessage(data);
+});
+
+
