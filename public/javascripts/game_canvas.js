@@ -142,6 +142,7 @@ $(document).ready(function(){
 
   gameInit();
   game.player = new Player();
+  socket.emit('newPlayer', game.player);
   game.players = [];
   then = Date.now();
   setInterval(mainLoop, 1000/FPS);
@@ -157,10 +158,6 @@ socket.on('sentMessage', function(data){
 
 // Networking
 
-socket.on('connect', function(){
-  socket.emit('newPlayer', game.player);
-});
-
 socket.on('initialSnapshot', function(data){
   for (i=0; i<data.players.length; i++){
     if (data.players[i].id != socket.id){
@@ -173,7 +170,6 @@ socket.on('snapshot', function(data){
   for (i=0; i<data.players.length; i++){
     for (x=0; x<game.players.length; x++){
       if (data.players[i].id == game.players[x].id){
-        console.log('executed');
         game.players[x].coords = data.players[i].coords;
       }
     }
@@ -182,6 +178,14 @@ socket.on('snapshot', function(data){
 
 socket.on('newPlayer', function(data){
   game.players.push(new Enemy(data));
+});
+
+socket.on('playerLeft', function(id){
+  for (i=0; i<game.players.length; i++){
+    if (game.players[i].id && game.players[i].id == id){
+      game.players.splice(i, 1);
+    }
+  }
 });
 
 setInterval(function(){

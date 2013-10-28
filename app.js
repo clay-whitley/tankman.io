@@ -68,8 +68,18 @@ io.sockets.on('connection', function(socket){
 
   socket.on('playerUpdate', function(data){
     for (i=0; i<players.length; i++){
-      if (players[i].id == socket.id){
+      if (players[i] && players[i].id == socket.id){
         players[i].coords = data.coords;
+      }
+    }
+  });
+
+  socket.on('disconnect', function(){
+    var disconnected;
+    for (i=0; i<players.length; i++){
+      if (players[i].id == socket.id){
+        socket.broadcast.emit('playerLeft', socket.id);
+        players.splice(i, 1);
       }
     }
   });
