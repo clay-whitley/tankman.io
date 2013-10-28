@@ -35,6 +35,8 @@ if ('development' == app.get('env')) {
 app.get('/', routes.index);
 app.get('/users', user.list);
 
+var players = [];
+
 io.sockets.on('connection', function(socket){
 
   socket.on('identify', function(identity){
@@ -50,5 +52,18 @@ io.sockets.on('connection', function(socket){
         message: data
       });
     });
+  });
+
+  socket.on('newPlayer', function(data){
+    data.id = socket.id;
+    players.push(data);
+  });
+
+  socket.on('getUpdate', function(){
+    socket.emit('serverUpdate', {players: players});
+  });
+
+  socket.on('playerUpdate', function(){
+
   });
 });

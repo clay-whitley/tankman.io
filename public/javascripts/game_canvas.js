@@ -47,6 +47,20 @@ Player.prototype.draw = function(context){
   context.fillRect(this.coords[0], this.coords[1], 50, 50);
 };
 
+// Enemy class
+
+function Enemy(opts){
+  this.coords = opts.coords;
+  this.color = opts.color;
+  this.id = opts.id;
+  this.speed = opts.speed;
+}
+
+Enemy.prototype.draw = function(context){
+  context.fillStyle = this.color;
+  context.fillRect(this.coords[0], this.coords[1], 50, 50);
+}
+
 // Key listeners
 
 var keysDown = {};
@@ -78,9 +92,14 @@ function update(modifier) {
 }
 
 function draw(){
+  // clear screen
   game.context.clearRect(0,0, game.canvas.width, game.canvas.height);
   // draw background
   // draw enemies
+  for (i=0; i<game.players.length; i++){
+    game.players[i].draw(game.context);
+  }
+  // draw player
   game.player.draw(game.context);
   // draw explosives
   // draw explosions
@@ -123,6 +142,7 @@ $(document).ready(function(){
 
   gameInit();
   game.player = new Player();
+  game.players = [];
   then = Date.now();
   setInterval(mainLoop, 1000/FPS);
 });
@@ -135,4 +155,21 @@ socket.on('sentMessage', function(data){
   renderMessage(data);
 });
 
+// Networking
 
+socket.on('connect', function(){
+  socket.emit('getUpdate');
+  socket.emit('newPlayer', game.player);
+});
+
+socket.on('serverUpdate', function(data){
+  game.players = [];
+  for (i=0; i<data.players.length; i++){
+    game.players.push(new Enemy(data.players[i]));
+  }
+});
+
+setInterval(function(){
+  socket.emit('playerUpdate', game.player);
+  socket.emit('getUpdate');
+}, 30);
