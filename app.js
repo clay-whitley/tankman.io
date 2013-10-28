@@ -54,16 +54,23 @@ io.sockets.on('connection', function(socket){
     });
   });
 
+  socket.emit('initialSnapshot', {players: players});
+
   socket.on('newPlayer', function(data){
     data.id = socket.id;
     players.push(data);
+    socket.broadcast.emit('newPlayer', data);
   });
 
-  socket.on('getUpdate', function(){
-    socket.emit('serverUpdate', {players: players});
+  socket.on('getSnapshot', function(){
+    socket.emit('snapshot', {players: players});
   });
 
-  socket.on('playerUpdate', function(){
-
+  socket.on('playerUpdate', function(data){
+    for (i=0; i<players.length; i++){
+      if (players[i].id == socket.id){
+        players[i].coords = data.coords;
+      }
+    }
   });
 });

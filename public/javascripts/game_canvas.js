@@ -158,18 +158,33 @@ socket.on('sentMessage', function(data){
 // Networking
 
 socket.on('connect', function(){
-  socket.emit('getUpdate');
   socket.emit('newPlayer', game.player);
 });
 
-socket.on('serverUpdate', function(data){
-  game.players = [];
+socket.on('initialSnapshot', function(data){
   for (i=0; i<data.players.length; i++){
-    game.players.push(new Enemy(data.players[i]));
+    if (data.players[i].id != socket.id){
+      game.players.push(new Enemy(data.players[i]));
+    }
   }
+});
+
+socket.on('snapshot', function(data){
+  for (i=0; i<data.players.length; i++){
+    for (x=0; x<game.players.length; x++){
+      if (data.players[i].id == game.players[x].id){
+        console.log('executed');
+        game.players[x].coords = data.players[i].coords;
+      }
+    }
+  }
+});
+
+socket.on('newPlayer', function(data){
+  game.players.push(new Enemy(data));
 });
 
 setInterval(function(){
   socket.emit('playerUpdate', game.player);
-  socket.emit('getUpdate');
+  socket.emit('getSnapshot');
 }, 30);
