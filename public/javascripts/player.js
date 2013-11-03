@@ -11,6 +11,7 @@ function Player(opts){
 Player.prototype.shoot = function(){
   var newShot = new Shot({coords: this.coords, id: socket.socket.sessionid, direction: this.orientation});
   game.shots.push(newShot);
+  socket.emit('newShot', newShot);
 };
 
 Player.prototype.draw = function(context){

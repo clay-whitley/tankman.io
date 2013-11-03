@@ -75,6 +75,10 @@ io.sockets.on('connection', function(socket){
     }
   });
 
+  socket.on('newShot', function(data){
+    socket.broadcast.emit('newShot', data);
+  });
+
   socket.on('disconnect', function(){
     var disconnected;
     for (i=0; i<players.length; i++){

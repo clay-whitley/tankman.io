@@ -31,6 +31,10 @@ socket.on('playerLeft', function(id){
   }
 });
 
+socket.on('newShot', function(data){
+  game.shots.push(new Shot(data));
+});
+
 setInterval(function(){
   socket.emit('playerUpdate', game.player);
   socket.emit('getSnapshot');
