@@ -4,3 +4,7 @@ function renderMessage(data){
   $elem.find('.message').html(data.message);
   $('#messages').append($elem);
 }
+
+socket.on('sentMessage', function(data){
+  renderMessage(data);
+});

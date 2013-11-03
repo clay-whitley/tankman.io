@@ -1,3 +1,5 @@
+// Cookie read/write
+
 function createCookie(name, value, days) {
     if (days) {
         var date = new Date();
@@ -21,3 +23,26 @@ function readCookie(name) {
 function eraseCookie(name) {
     createCookie(name, "", -1);
 }
+
+// Player color generator
+
+function getRandomColor() {
+  var letters = '0123456789ABCDEF'.split('');
+  var color = '#';
+  for (var i = 0; i < 6; i++ ) {
+    color += letters[Math.round(Math.random() * 15)];
+  }
+  return color;
+}
+
+// Key listeners
+
+var keysDown = {};
+
+addEventListener("keydown", function (e) {
+  keysDown[e.keyCode] = true;
+}, false);
+
+addEventListener("keyup", function (e) {
+  delete keysDown[e.keyCode];
+}, false);
