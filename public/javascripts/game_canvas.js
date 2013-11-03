@@ -16,23 +16,6 @@ function getRandomColor() {
   return color;
 }
 
-// Board class
-
-function Board(opts){
-  this.cellHeight = 50;
-  this.cellWidth = 50;
-}
-
-Board.prototype.calculatePixels = function(coords){
-  var result = [];
-  result[0] = coords[0] * this.cellWidth;
-  result[1] = coords[1] * this.cellHeight;
-  result[2] = 50;
-  result[3] = 50;
-  return result;
-};
-
-
 // Player Class
 
 function Player(opts){
