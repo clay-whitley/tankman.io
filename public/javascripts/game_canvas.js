@@ -78,16 +78,24 @@ addEventListener("keyup", function (e) {
 // Update game objects
 function update(modifier) {
   if (38 in keysDown) { // Player holding up
-    game.player.coords[1] -= game.player.speed * modifier;
+    if (game.player.coords[1] > 0){
+      game.player.coords[1] -= game.player.speed * modifier;
+    }
   }
   if (40 in keysDown) { // Player holding down
-    game.player.coords[1] += game.player.speed * modifier;
+    if (game.player.coords[1] + 50 < game.canvas.height){
+      game.player.coords[1] += game.player.speed * modifier;
+    }
   }
   if (37 in keysDown) { // Player holding left
-    game.player.coords[0] -= game.player.speed * modifier;
+    if (game.player.coords[0] > 0){
+      game.player.coords[0] -= game.player.speed * modifier;
+    }
   }
   if (39 in keysDown) { // Player holding right
-    game.player.coords[0] += game.player.speed * modifier;
+    if (game.player.coords[0] + 50 < game.canvas.width){
+      game.player.coords[0] += game.player.speed * modifier;
+    }
   }
 }
 
