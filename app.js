@@ -70,6 +70,7 @@ io.sockets.on('connection', function(socket){
     for (i=0; i<players.length; i++){
       if (players[i] && players[i].id == socket.id){
         players[i].coords = data.coords;
+        players[i].orientation = data.orientation;
       }
     }
   });
