@@ -8,6 +8,11 @@ function Player(opts){
   this.speed = 100;
 }
 
+Player.prototype.shoot = function(){
+  var newShot = new Shot({coords: this.coords, id: socket.socket.sessionid, direction: this.orientation});
+  game.shots.push(newShot);
+};
+
 Player.prototype.draw = function(context){
   context.fillStyle = this.color;
   context.fillRect(this.coords[0], this.coords[1], 50, 50);

@@ -1,9 +1,11 @@
 function Shot(opts){
   this.height = 5;
   this.width = 5;
-  this.coords = opts.coords;
+  this.coords = [opts.coords[0], opts.coords[1]];
   this.speed = 200;
   this.active = true;
+  this.id = opts.id;
+  this.direction = opts.direction;
 }
 
 Shot.prototype.draw = function(context){

@@ -14,6 +14,7 @@ function gameInit(){
   game.player = new Player();
   socket.emit('newPlayer', game.player);
   game.players = [];
+  game.shots = [];
   then = Date.now();
   setInterval(mainLoop, 1000/game.fps);
 }
@@ -38,4 +39,10 @@ $(document).ready(function(){
   });
 
   gameInit();
+
+  $(document).on('keypress', function(e){
+    if (e.keyCode == 32){
+      game.player.shoot();
+    }
+  })
 });

@@ -25,6 +25,30 @@ function update(modifier) {
       game.player.orientation = 'right';
     }
   }
+
+  var activeShots = [];
+
+  for (i=0; i<game.shots.length; i++){
+    if (game.shots[i].active === true){
+      if (game.shots[i].direction == 'up'){
+        game.shots[i].coords[1] -= game.shots[i].speed * modifier;
+      } else if (game.shots[i].direction == 'down'){
+        game.shots[i].coords[1] += game.shots[i].speed * modifier;
+      } else if (game.shots[i].direction == 'left'){
+        game.shots[i].coords[0] -= game.shots[i].speed * modifier;
+      } else if (game.shots[i].direction == 'right'){
+        game.shots[i].coords[0] += game.shots[i].speed * modifier;
+      }
+
+      if (game.shots[i].coords[0] < 0 || game.shots[i].coords[0] > game.canvas.width || game.shots[i].coords[1] < 0 || game.shots[i].coords[1] > game.canvas.height) {
+        game.shots[i].active = false;
+      } else {
+        activeShots.push(game.shots[i]);
+      }
+    }
+  }
+
+  game.shots = activeShots;
 }
 
 function draw(){
@@ -38,6 +62,9 @@ function draw(){
   // draw player
   game.player.draw(game.context);
   // draw explosives
+  for (i=0; i<game.shots.length; i++){
+    game.shots[i].draw(game.context);
+  }
   // draw explosions
 }
 
