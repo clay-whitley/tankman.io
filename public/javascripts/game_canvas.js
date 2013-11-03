@@ -38,6 +38,7 @@ Board.prototype.calculatePixels = function(coords){
 function Player(opts){
   this.coords = [0,0];
   this.color = getRandomColor();
+  this.orientation = 'down';
   // 100 px per second
   this.speed = 100;
 }
@@ -45,6 +46,15 @@ function Player(opts){
 Player.prototype.draw = function(context){
   context.fillStyle = this.color;
   context.fillRect(this.coords[0], this.coords[1], 50, 50);
+  if (this.orientation == 'up'){
+    context.fillRect(this.coords[0] + 25, this.coords[1] - 10, 5, 10);
+  } else if (this.orientation == 'down'){
+    context.fillRect(this.coords[0] + 25, this.coords[1] + 50, 5, 10);
+  } else if (this.orientation == 'left'){
+    context.fillRect(this.coords[0] - 10, this.coords[1] + 25, 10, 5);
+  } else if (this.orientation == 'right'){
+    context.fillRect(this.coords[0] + 50, this.coords[1] + 25, 10, 5);
+  }
 };
 
 // Enemy class
@@ -54,6 +64,7 @@ function Enemy(opts){
   this.color = opts.color;
   this.id = opts.id;
   this.speed = opts.speed;
+  this.orientation = opts.orientation;
 }
 
 Enemy.prototype.draw = function(context){
@@ -80,21 +91,25 @@ function update(modifier) {
   if (38 in keysDown) { // Player holding up
     if (game.player.coords[1] > 0){
       game.player.coords[1] -= game.player.speed * modifier;
+      game.player.orientation = 'up';
     }
   }
   if (40 in keysDown) { // Player holding down
     if (game.player.coords[1] + 50 < game.canvas.height){
       game.player.coords[1] += game.player.speed * modifier;
+      game.player.orientation = 'down';
     }
   }
   if (37 in keysDown) { // Player holding left
     if (game.player.coords[0] > 0){
       game.player.coords[0] -= game.player.speed * modifier;
+      game.player.orientation = 'left';
     }
   }
   if (39 in keysDown) { // Player holding right
     if (game.player.coords[0] + 50 < game.canvas.width){
       game.player.coords[0] += game.player.speed * modifier;
+      game.player.orientation = 'right';
     }
   }
 }
