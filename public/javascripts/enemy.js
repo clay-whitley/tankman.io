@@ -5,6 +5,7 @@ function Enemy(opts){
   this.color = opts.color;
   this.id = opts.id;
   this.speed = opts.speed;
+  this.health = opts.health;
   this.width = 50;
   this.height = 50;
   this.orientation = opts.orientation;

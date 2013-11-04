@@ -71,6 +71,7 @@ io.sockets.on('connection', function(socket){
       if (players[i] && players[i].id == socket.id){
         players[i].coords = data.coords;
         players[i].orientation = data.orientation;
+        players[i].health = data.health;
       }
     }
   });

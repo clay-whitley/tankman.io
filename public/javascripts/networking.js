@@ -14,6 +14,7 @@ socket.on('snapshot', function(data){
       if (data.players[i].id == game.players[x].id){
         game.players[x].coords = data.players[i].coords;
         game.players[x].orientation = data.players[i].orientation;
+        game.players[x].health = data.players[i].health;
       }
     }
   }
