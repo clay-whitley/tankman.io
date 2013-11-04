@@ -29,7 +29,7 @@ function update(modifier) {
   var activeShots = [];
 
   for (i=0; i<game.shots.length; i++){
-    if (game.shots[i].active === true){
+    if (game.shots[i].status == 'active'){
       if (game.shots[i].direction == 'up'){
         game.shots[i].coords[1] -= game.shots[i].speed * modifier;
       } else if (game.shots[i].direction == 'down'){
@@ -41,8 +41,16 @@ function update(modifier) {
       }
 
       if (game.shots[i].coords[0] < 0 || game.shots[i].coords[0] > game.canvas.width || game.shots[i].coords[1] < 0 || game.shots[i].coords[1] > game.canvas.height) {
-        game.shots[i].active = false;
-      } else {
+        game.shots[i].status = 'disabled';
+      }
+
+      for (p=0; p<game.players.length; p++){
+        if (checkCollision(game.shots[i], game.players[p])){
+          game.shots[i].status = 'hit';
+        }
+      }
+
+      if (game.shots[i].status != 'disabled' && game.shots[i].status != 'hit'){
         activeShots.push(game.shots[i]);
       }
     }

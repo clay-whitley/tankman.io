@@ -6,6 +6,8 @@ function Player(opts){
   this.orientation = 'down';
   // 100 px per second
   this.speed = 100;
+  this.height = 50;
+  this.width = 50;
 }
 
 Player.prototype.shoot = function(){
@@ -16,7 +18,7 @@ Player.prototype.shoot = function(){
 
 Player.prototype.draw = function(context){
   context.fillStyle = this.color;
-  context.fillRect(this.coords[0], this.coords[1], 50, 50);
+  context.fillRect(this.coords[0], this.coords[1], this.width, this.height);
   if (this.orientation == 'up'){
     context.fillRect(this.coords[0] + 25, this.coords[1] - 10, 5, 10);
   } else if (this.orientation == 'down'){

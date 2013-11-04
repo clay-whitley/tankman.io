@@ -3,7 +3,7 @@ function Shot(opts){
   this.width = 5;
   this.coords = [opts.coords[0], opts.coords[1]];
   this.speed = 200;
-  this.active = true;
+  this.status = 'active';
   this.id = opts.id;
   this.direction = opts.direction;
 }

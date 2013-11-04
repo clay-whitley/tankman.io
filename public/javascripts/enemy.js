@@ -5,12 +5,14 @@ function Enemy(opts){
   this.color = opts.color;
   this.id = opts.id;
   this.speed = opts.speed;
+  this.width = 50;
+  this.height = 50;
   this.orientation = opts.orientation;
 }
 
 Enemy.prototype.draw = function(context){
   context.fillStyle = this.color;
-  context.fillRect(this.coords[0], this.coords[1], 50, 50);
+  context.fillRect(this.coords[0], this.coords[1], this.width, this.height);
   if (this.orientation == 'up'){
     context.fillRect(this.coords[0] + 25, this.coords[1] - 10, 5, 10);
   } else if (this.orientation == 'down'){
@@ -20,4 +22,4 @@ Enemy.prototype.draw = function(context){
   } else if (this.orientation == 'right'){
     context.fillRect(this.coords[0] + 50, this.coords[1] + 25, 10, 5);
   }
-}
+};
