@@ -50,6 +50,11 @@ function update(modifier) {
         }
       }
 
+      if (checkCollision(game.player, game.shots[i])){
+        game.player.takeDamage(1);
+        game.shots[i].status = 'hit';
+      }
+
       if (game.shots[i].status != 'disabled' && game.shots[i].status != 'hit'){
         activeShots.push(game.shots[i]);
       }
@@ -74,6 +79,10 @@ function draw(){
     game.shots[i].draw(game.context);
   }
   // draw explosions
+  // draw HUD (health and powers)
+  game.context.fillStyle = "blue";
+  game.context.font = "bold 16px Arial";
+  game.context.fillText("Health:" + game.player.health.toString(), game.canvas.width-100, 20);
 }
 
 function mainLoop() {

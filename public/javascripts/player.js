@@ -8,6 +8,7 @@ function Player(opts){
   this.speed = 100;
   this.height = 50;
   this.width = 50;
+  this.health = 100;
 }
 
 Player.prototype.shoot = function(){
@@ -15,6 +16,10 @@ Player.prototype.shoot = function(){
   game.shots.push(newShot);
   socket.emit('newShot', newShot);
 };
+
+Player.prototype.takeDamage = function(amount){
+  this.health -= amount;
+}
 
 Player.prototype.draw = function(context){
   context.fillStyle = this.color;
