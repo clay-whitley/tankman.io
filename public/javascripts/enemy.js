@@ -6,21 +6,23 @@ function Enemy(opts){
   this.id = opts.id;
   this.speed = opts.speed;
   this.health = opts.health;
-  this.width = 50;
-  this.height = 50;
+  this.width = game.map.pxWidth / game.map.width;
+  this.height = game.map.pxHeight / game.map.height;
   this.orientation = opts.orientation;
+  this.pxCoords = [this.coords[0] * this.width, this.coords[1] * this.height];
 }
 
 Enemy.prototype.draw = function(context){
+  this.pxCoords = [this.coords[0] * this.width, this.coords[1] * this.height];
   context.fillStyle = this.color;
-  context.fillRect(this.coords[0], this.coords[1], this.width, this.height);
+  context.fillRect(this.pxCoords[0], this.pxCoords[1], this.width, this.height);
   if (this.orientation == 'up'){
-    context.fillRect(this.coords[0] + 25, this.coords[1] - 10, 5, 10);
+    context.fillRect(this.pxCoords[0] + 25, this.pxCoords[1] - 10, 5, 10);
   } else if (this.orientation == 'down'){
-    context.fillRect(this.coords[0] + 25, this.coords[1] + 50, 5, 10);
+    context.fillRect(this.pxCoords[0] + 25, this.pxCoords[1] + 50, 5, 10);
   } else if (this.orientation == 'left'){
-    context.fillRect(this.coords[0] - 10, this.coords[1] + 25, 10, 5);
+    context.fillRect(this.pxCoords[0] - 10, this.pxCoords[1] + 25, 10, 5);
   } else if (this.orientation == 'right'){
-    context.fillRect(this.coords[0] + 50, this.coords[1] + 25, 10, 5);
+    context.fillRect(this.pxCoords[0] + 50, this.pxCoords[1] + 25, 10, 5);
   }
 };

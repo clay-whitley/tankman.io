@@ -3,26 +3,21 @@
 function update(modifier) {
   if (38 in keysDown) { // Player holding up
     if (game.player.coords[1] > 0){
-      game.player.coords[1] -= game.player.speed * modifier;
-      game.player.orientation = 'up';
-    }
+      game.player.moveUp(modifier);    }
   }
   if (40 in keysDown) { // Player holding down
     if (game.player.coords[1] + 50 < game.canvas.height){
-      game.player.coords[1] += game.player.speed * modifier;
-      game.player.orientation = 'down';
+      game.player.moveDown(modifier);
     }
   }
   if (37 in keysDown) { // Player holding left
     if (game.player.coords[0] > 0){
-      game.player.coords[0] -= game.player.speed * modifier;
-      game.player.orientation = 'left';
+      game.player.moveLeft(modifier);
     }
   }
   if (39 in keysDown) { // Player holding right
     if (game.player.coords[0] + 50 < game.canvas.width){
-      game.player.coords[0] += game.player.speed * modifier;
-      game.player.orientation = 'right';
+      game.player.moveRight(modifier);
     }
   }
 

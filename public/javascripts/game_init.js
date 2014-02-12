@@ -5,8 +5,8 @@ function gameInit(){
 
   game.canvas = document.createElement("canvas");
   game.context = game.canvas.getContext("2d");
-  game.canvas.width = 900;
-  game.canvas.height = 300;
+  game.canvas.width = 950;
+  game.canvas.height = 600;
   $('body').prepend(game.canvas);
 
   game.fps = 30;
