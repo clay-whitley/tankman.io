@@ -4,17 +4,19 @@ function Map(map_array) {
   this.height = map_array.length;
   this.width = map_array[0].length;
   this.array = map_array;
-  this.pxHeight = 400;
-  this.pxWidth = 900;
+  this.pxHeight = 600;
+  this.pxWidth = 950;
   this.cells = [];
   for (y=0;y<map_array.length;y++){
-    for (x=0;x<y.length; x++){
-      this.cells.push(new Cell({coords: [x, y], map: this, type: y[x]}));
+    for (x=0;x<map_array[y].length; x++){
+      var cell = new Cell({coords: [x, y], map: this, type: map_array[y][x]})
+      this.cells.push(cell);
     }
   }
 }
 
 Map.prototype.draw = function(context){
-  context.fillStyle = this.color;
-  context.fillRect(this.coords[0], this.coords[1], this.width, this.height);
+  for (i=0;i<this.cells.length;i++){
+    this.cells[i].draw(context);
+  }
 };

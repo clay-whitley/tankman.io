@@ -8,6 +8,10 @@ socket.on('initialSnapshot', function(data){
   }
 });
 
+socket.on('mapData', function(data){
+  game.map = new Map(data)
+});
+
 socket.on('snapshot', function(data){
   for (i=0; i<data.players.length; i++){
     for (x=0; x<game.players.length; x++){

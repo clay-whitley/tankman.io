@@ -12,7 +12,7 @@ function Cell(opts){
 
 Cell.prototype.draw = function(context){
   if (this.type == "a") {
-    context.fillStyle = "#fff";
+    context.fillStyle = "#ddd";
   } else {
     context.fillStyle = "#000";
   }

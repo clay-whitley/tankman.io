@@ -10,6 +10,9 @@ var http = require('http');
 var path = require('path');
 var networking = require('./lib/networking');
 var engine = require('./lib/engine');
+var map = require('./lib/maps/sandbox_map.json')
+
+console.log(map)
 
 var app = express();
 var server = http.createServer(app);
@@ -37,4 +40,4 @@ if ('development' == app.get('env')) {
 app.get('/', routes.index);
 app.get('/users', user.list);
 
-networking.init(io);
+networking.init(io, map);

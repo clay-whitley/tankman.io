@@ -68,6 +68,7 @@ function draw(){
   // clear screen
   game.context.clearRect(0,0, game.canvas.width, game.canvas.height);
   // draw background
+  game.map.draw(game.context);
   // draw enemies
   for (i=0; i<game.players.length; i++){
     game.players[i].draw(game.context);
