@@ -22,12 +22,7 @@ function gameInit(){
 // Game initialization
 
 $(document).ready(function(){
-  if (readCookie('identity')){
-    var identity = readCookie('identity');
-  } else {
-    var identity = prompt("Enter name:");
-    createCookie('identity', identity);
-  }
+  var identity = readCookie('identity');
   socket.emit('identify', identity);
 
   $('#chatForm').on('submit', function(e){

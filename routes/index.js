@@ -4,5 +4,9 @@
  */
 
 exports.index = function(req, res){
-  res.render('index', { title: 'tankman.io' });
+  if (req.cookies.identity){
+    res.render('index', { title: 'tankman.io' });
+  } else {
+    res.render('sign_in', { title: 'Sign in'});
+  }
 };

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="/javascripts/jquery.min.js"></script>
+    <script src="/javascripts/utility.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function(){
+        $('#identifyForm').on('submit', function(e){
+          e.preventDefault();
+          var identity = $(this).serializeArray()[0].value;
+          createCookie('identity', identity);
+          document.location.href = '/';
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <form method="POST" id="identifyForm">
+      <input type="text" name="identity">
+      <input type="submit" value="Sign in">
+    </form>
+  </body>
+</html>
