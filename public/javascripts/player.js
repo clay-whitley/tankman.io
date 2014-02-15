@@ -40,7 +40,16 @@ Player.prototype.moveUp = function(modifier){
 }
 
 Player.prototype.shoot = function(){
-  var newShot = new Shot({coords: this.coords, id: socket.socket.sessionid, direction: this.orientation});
+  if (this.orientation == 'down'){
+    var position = [this.coords[0], this.coords[1]+1];
+  } else if (this.orientation == 'up') {
+    var position = [this.coords[0], this.coords[1]-1];
+  } else if (this.orientation == 'left') {
+    var position = [this.coords[0]-1, this.coords[1]];
+  } else if (this.orientation == 'right') {
+    var position = [this.coords[0]+1, this.coords[1]];
+  }
+  var newShot = new Shot({coords: position, id: socket.socket.sessionid, direction: this.orientation});
   game.shots.push(newShot);
   socket.emit('newShot', newShot);
 };
