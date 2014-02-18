@@ -9,7 +9,7 @@ function Map(map_array) {
   this.cells = [];
   for (y=0;y<map_array.length;y++){
     for (x=0;x<map_array[y].length; x++){
-      var cell = new Cell({coords: [x, y], map: this, type: map_array[y][x]})
+      var cell = cellCreator({coords: [x, y], map: this, type: map_array[y][x]})
       this.cells.push(cell);
     }
   }
