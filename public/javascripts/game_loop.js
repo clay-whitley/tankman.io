@@ -26,13 +26,13 @@ function update(modifier) {
   for (i=0; i<game.shots.length; i++){
     if (game.shots[i].status == 'active'){
       if (game.shots[i].direction == 'up'){
-        game.shots[i].coords[1] -= game.shots[i].speed * modifier;
+        game.shots[i].coords[1] -= Math.floor(game.shots[i].speed * modifier);
       } else if (game.shots[i].direction == 'down'){
-        game.shots[i].coords[1] += game.shots[i].speed * modifier;
+        game.shots[i].coords[1] += Math.floor(game.shots[i].speed * modifier);
       } else if (game.shots[i].direction == 'left'){
-        game.shots[i].coords[0] -= game.shots[i].speed * modifier;
+        game.shots[i].coords[0] -= Math.floor(game.shots[i].speed * modifier);
       } else if (game.shots[i].direction == 'right'){
-        game.shots[i].coords[0] += game.shots[i].speed * modifier;
+        game.shots[i].coords[0] += Math.floor(game.shots[i].speed * modifier);
       }
 
       if (game.shots[i].coords[0] < 0 || game.shots[i].coords[0] > game.canvas.width || game.shots[i].coords[1] < 0 || game.shots[i].coords[1] > game.canvas.height) {
