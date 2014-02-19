@@ -10,6 +10,14 @@ function Cell(opts){
   this.status = "normal";
 }
 
+Cell.prototype.movable = function(){
+  if (this.type == "a") {
+    return true;
+  } else {
+    return false;
+  }
+}
+
 Cell.prototype.draw = function(context){
   if (this.type == "a") {
     context.fillStyle = "#ddd";

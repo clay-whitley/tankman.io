@@ -16,25 +16,37 @@ Player.prototype.init = function(map){
 }
 
 Player.prototype.moveLeft = function(modifier){
-  this.coords[0] -= Math.floor(this.speed * modifier);
+  var newCoords = [this.coords[0] - Math.floor(this.speed * modifier), this.coords[1]]
+  if (game.map.cellAtCoords(newCoords[0], newCoords[1]).movable()){
+    this.coords = newCoords;
+  }
   this.orientation = 'left';
   this.pxCoords = [this.coords[0] * this.width, this.coords[1] * this.height];
 }
 
 Player.prototype.moveRight = function(modifier){
-  this.coords[0] += Math.floor(this.speed * modifier);
+  var newCoords = [this.coords[0] + Math.floor(this.speed * modifier), this.coords[1]]
+  if (game.map.cellAtCoords(newCoords[0], newCoords[1]).movable()){
+    this.coords = newCoords;
+  }
   this.orientation = 'right';
   this.pxCoords = [this.coords[0] * this.width, this.coords[1] * this.height];
 }
 
 Player.prototype.moveDown = function(modifier){
-  this.coords[1] += Math.floor(this.speed * modifier);
+  var newCoords = [this.coords[0], this.coords[1] + Math.floor(this.speed * modifier)]
+  if (game.map.cellAtCoords(newCoords[0], newCoords[1]).movable()){
+    this.coords = newCoords;
+  }
   this.orientation = 'down';
   this.pxCoords = [this.coords[0] * this.width, this.coords[1] * this.height];
 }
 
 Player.prototype.moveUp = function(modifier){
-  this.coords[1] -= Math.floor(this.speed * modifier);
+  var newCoords = [this.coords[0], this.coords[1] - Math.floor(this.speed * modifier)]
+  if (game.map.cellAtCoords(newCoords[0], newCoords[1]).movable()){
+    this.coords = newCoords;
+  }
   this.orientation = 'up';
   this.pxCoords = [this.coords[0] * this.width, this.coords[1] * this.height];
 }

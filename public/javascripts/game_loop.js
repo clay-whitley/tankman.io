@@ -57,11 +57,12 @@ function update(modifier) {
   //     }
   //   }
   // }
-
-  for (i=0;i<game.map.cells.length;i++){
-    if (game.map.cells[i].type == "e"){
-      if (checkCollision(game.map.cells[i], game.player)){
-        game.player.takeDamage(10)
+  if (game.map){
+    for (i=0;i<game.map.cells.length;i++){
+      if (game.map.cells[i].type == "e"){
+        if (checkCollision(game.map.cells[i], game.player)){
+          game.player.takeDamage(10)
+        }
       }
     }
   }
