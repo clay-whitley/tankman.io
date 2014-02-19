@@ -9,6 +9,7 @@
     <script src="/javascripts/map.js"></script>
     <script src="/javascripts/cell.js"></script>
     <script src="/javascripts/shot.js"></script>
+    <script src="/javascripts/explosion.js"></script>
     <script src="/javascripts/player.js"></script>
     <script src="/javascripts/enemy.js"></script>
     <script src="/javascripts/game_loop.js"></script>
@@ -17,11 +18,11 @@
     <script src="/javascripts/chat.js"></script>
   </head>
   <body>
-    <div id="chatBox" style="height:150px; width: 80%; border: 1px solid black; overflow: scroll;">
+    <div id="chatBox" style="height:150px; width: 80%; border: 1px solid black; overflow: scroll; display:none;">
       <table id="messages">
       </table>
     </div>
-    <form action="/" id="chatForm">
+    <form action="/" id="chatForm" style="display:none">
       <input type="text" name="message" id="messageForm">
       <input type="submit" value="Send">
     </form>
