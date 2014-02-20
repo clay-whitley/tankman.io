@@ -11,25 +11,38 @@ Explosion.prototype.expand = function(){
   if (this.counter <= this.radius) {
       // Up
     var c1 = game.map.cellAtCoords(this.center[0], this.center[1] - this.counter);
-    if (c1) {
+    if (c1 && !this.upStop) {
+      if (c1.type == "w"){
+        this.upStop = true;
+      }
       c1.type = "e";
       this.cells.push(c1)
     }
     // Down
     var c2 = game.map.cellAtCoords(this.center[0], this.center[1] + this.counter);
-    if (c2) {
+    if (c2 && !this.downStop) {
+      if (c2.type == "w"){
+        this.downStop = true;
+      }
       c2.type = "e";
       this.cells.push(c2)
     }
     // Left
     var c3 = game.map.cellAtCoords(this.center[0] - this.counter, this.center[1]);
-    if (c3) {
+    if (c3 && !this.leftStop) {
+      if (c3.type == "w"){
+        this.leftStop = true;
+      }
       c3.type = "e";
       this.cells.push(c3)
     }
     // Right
     var c4 = game.map.cellAtCoords(this.center[0] + this.counter, this.center[1])
-    if (c4) {
+    if (c4 && !this.rightStop) {
+      if (c4.type == "w"){
+        this.rightStop = true;
+
+      }
       c4.type = "e";
       this.cells.push(c4)
     }
