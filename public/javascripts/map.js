@@ -20,3 +20,13 @@ Map.prototype.draw = function(context){
     this.cells[i].draw(context);
   }
 };
+
+Map.prototype.cellAtCoords = function(x,y){
+  for (i=0;i<this.cells.length;i++){
+    if (this.cells[i].coords[1] == y){
+      if (this.cells[i].coords[0] == x){
+        return this.cells[i];
+      }
+    }
+  }
+}
