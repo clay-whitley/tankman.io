@@ -17,6 +17,7 @@ console.log(map)
 var app = express();
 var server = http.createServer(app);
 var io = require('socket.io').listen(server);
+io.set('log level', 2);
 server.listen(8080);
 
 // all environments
