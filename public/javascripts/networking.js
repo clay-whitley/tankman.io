@@ -9,7 +9,7 @@ socket.on('initialSnapshot', function(data){
 });
 
 socket.on('mapData', function(data){
-  game.map = new Map(data);
+  game.map = makeMap(data);
   game.player.init(game.map);
 });
 

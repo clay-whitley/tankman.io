@@ -1,5 +1,5 @@
 game = {};
-socket = io.connect('http://ec2-54-186-174-23.us-west-2.compute.amazonaws.com');
+socket = io.connect('http://localhost:8080');
 
 function gameInit(){
 
