@@ -64,7 +64,7 @@ define(["models/game"], function(game){
     // draw HUD (health and powers)
     game.context.fillStyle = "blue";
     game.context.font = "bold 16px Arial";
-    game.context.fillText("Health:" + game.player.health.toString(), game.canvas.width-100, 20);
+    game.context.fillText("Health:" + game.player.health().toString(), game.canvas.width-100, 20);
   }
 
   function mainLoop() {
@@ -76,7 +76,7 @@ define(["models/game"], function(game){
 
     then = now;
   }
-  
+
   return {
     mainLoop: mainLoop
   };

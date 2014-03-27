@@ -1,38 +1,47 @@
 define(['./cell'], function(cell){
+
+  function makeMap(map_array) {
+    var height = map_array.length;
+    var width = map_array[0].length;
+    var array = map_array;
+    var pxHeight = 600;
+    var pxWidth = 950;
+    var cells = [];
+    for (y=0;y<map_array.length;y++){
+      for (x=0;x<map_array[y].length; x++){
+        var new_cell = cell.create({coords: [x, y], pxHeight: pxHeight, pxWidth: pxWidth, width: width, height: height, type: map_array[y][x]});
+        cells.push(new_cell);
+      }
+    }
+
+    return {
+      draw: function(context){
+        for (i=0;i<cells.length;i++){
+          cells[i].draw(context);
+        }
+      }, cellAtCoords: function(x,y){
+        for (i=0;i<cells.length;i++){
+          if (cells[i].coords[1] == y){
+            if (cells[i].coords[0] == x){
+              return cells[i];
+            }
+          }
+        }
+      }, cells: function(){
+        return cells;
+      }, pxHeight: function(){
+        return pxHeight;
+      }, pxWidth: function(){
+        return pxWidth;
+      }, height: function(){
+        return height;
+      }, width: function(){
+        return width;
+      }
+    };
+  }
+
   return {
     create: makeMap
   };
 });
-
-// Map model takes a 2D array representation of the map as input on initialization
-
-function makeMap(map_array) {
-  height = map_array.length;
-  width = map_array[0].length;
-  array = map_array;
-  pxHeight = 600;
-  pxWidth = 950;
-  cells = [];
-  for (y=0;y<map_array.length;y++){
-    for (x=0;x<map_array[y].length; x++){
-      var cell = makeCell({coords: [x, y], map: this, type: map_array[y][x]});
-      cells.push(cell);
-    }
-  }
-
-  return {
-    draw: function(context){
-      for (i=0;i<this.cells.length;i++){
-        this.cells[i].draw(context);
-      }
-    }, cellAtCoords: function(x,y){
-      for (i=0;i<this.cells.length;i++){
-        if (this.cells[i].coords[1] == y){
-          if (this.cells[i].coords[0] == x){
-            return this.cells[i];
-          }
-        }
-      }
-    }
-  };
-}

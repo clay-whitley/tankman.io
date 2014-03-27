@@ -1,4 +1,4 @@
-define(["game_loop", "models/player", "models/game"], function(loop, player, game){
+define(["game_loop", "models/game", "networking"], function(loop, game, networking){
   return {
     gameInit: function(){
       game.canvas = document.createElement("canvas");
@@ -6,11 +6,9 @@ define(["game_loop", "models/player", "models/game"], function(loop, player, gam
       game.canvas.width = 950;
       game.canvas.height = 600;
       $('body').prepend(game.canvas);
-
-      game.player = player.create();
-      socket.emit('newPlayer', game.player);
       
       then = Date.now();
+
       setInterval(loop.mainLoop, 1000/game.fps);
     }, domInit: function(){
       var identity = readCookie('identity');

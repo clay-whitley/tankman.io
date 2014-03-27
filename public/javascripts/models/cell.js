@@ -1,36 +1,38 @@
 // Represents a single grid square on the map. Can be various types of terrain.
 
 define(function(){
+
+  function makeCell(opts){
+    var type = opts.type;
+    var coords = opts.coords;
+    var width = opts.pxWidth / opts.width;
+    var height = opts.pxHeight / opts.height;
+    var pxCoords = [opts.coords[0] * width, opts.coords[1] * height];
+    var status = "normal";
+
+    return {
+      movable: function(){
+        if (type == "a") {
+        return true;
+        } else {
+        return false;
+        }
+      }, draw: function(context){
+        if (type == "a") {
+          context.fillStyle = "#ddd";
+        } else if (type == "e") {
+          context.fillStyle = "#ff0000";
+        } else {
+          context.fillStyle = "#111";
+        }
+        context.fillRect(pxCoords[0], pxCoords[1], width, height);
+      }, type: function(){
+        return type;
+      }
+    };
+  }
+
   return {
     create: makeCell
   };
 });
-
-function makeCell(opts){
-  type = opts.type;
-  map = opts.map;
-  coords = opts.coords;
-  width = opts.map.pxWidth / opts.map.width;
-  height = opts.map.pxHeight / opts.map.height;
-  pxCoords = [opts.coords[0] * width, opts.coords[1] * height];
-  status = "normal";
-
-  return {
-    movable: function(){
-      if (this.type == "a") {
-      return true;
-      } else {
-      return false;
-      }
-    }, draw: function(context){
-      if (this.type == "a") {
-        context.fillStyle = "#ddd";
-      } else if (this.type == "e") {
-        context.fillStyle = "#ff0000";
-      } else {
-        context.fillStyle = "#000";
-      }
-      context.fillRect(this.pxCoords[0], this.pxCoords[1], this.width, this.height);
-    }
-  };
-}
