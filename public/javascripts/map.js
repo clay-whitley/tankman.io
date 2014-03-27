@@ -1,3 +1,7 @@
+define(['./cell'], function(cell){
+  return makeMap;
+});
+
 // Map model takes a 2D array representation of the map as input on initialization
 
 function makeMap(map_array) {

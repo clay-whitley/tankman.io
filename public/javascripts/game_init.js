@@ -1,5 +1,10 @@
-game = {};
-socket = io.connect('http://localhost:8080');
+define(function(){
+  game = {};
+  return {
+    gameInit: gameInit,
+    domInit: domInit
+  };
+});
 
 function gameInit(){
 
@@ -19,9 +24,7 @@ function gameInit(){
   setInterval(mainLoop, 1000/game.fps);
 }
 
-// Game initialization
-
-$(document).ready(function(){
+function domInit(){
   var identity = readCookie('identity');
   socket.emit('identify', identity);
 
@@ -33,11 +36,9 @@ $(document).ready(function(){
     renderMessage({sender: readCookie('identity'), message: message});
   });
 
-  gameInit();
-
   $(document).on('keypress', function(e){
     if (e.keyCode == 32){
       game.player.shoot();
     }
-  })
-});
+  });
+}
