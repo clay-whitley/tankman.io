@@ -1,5 +1,5 @@
-define(function(){
-  game = {};
+define(["game_loop", "models/player"], function(loop, player){
+  var game = {};
   return {
     gameInit: gameInit,
     domInit: domInit
@@ -21,7 +21,7 @@ function gameInit(){
   game.players = [];
   game.shots = [];
   then = Date.now();
-  setInterval(mainLoop, 1000/game.fps);
+  setInterval(loop.mainLoop, 1000/game.fps);
 }
 
 function domInit(){

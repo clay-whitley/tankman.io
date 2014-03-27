@@ -1,7 +1,9 @@
 // Represents a single grid square on the map. Can be various types of terrain.
 
 define(function(){
-  return makeCell;
+  return {
+    create: makeCell
+  };
 });
 
 function makeCell(opts){
