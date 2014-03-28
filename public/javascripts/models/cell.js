@@ -32,6 +32,11 @@ define(function(){
         return coords;
       }, setType: function(new_type){
         type = new_type;
+      }, serialize: function(){
+        return {
+          coords: coords,
+          type: type
+        };
       }
     };
   }
