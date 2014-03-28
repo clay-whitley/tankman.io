@@ -1,6 +1,6 @@
 // Enemy class
 
-define(function(){
+define(["models/game"], function(game){
 
   function makeEnemy(opts){
     var coords = opts.coords;
@@ -8,8 +8,8 @@ define(function(){
     var id = opts.id;
     var speed = opts.speed;
     var health = opts.health;
-    var width = game.map.pxWidth / game.map.width;
-    var height = game.map.pxHeight / game.map.height;
+    var width = game.map.pxWidth() / game.map.width();
+    var height = game.map.pxHeight() / game.map.height();
     var orientation = opts.orientation;
     var pxCoords = [coords[0] * width, coords[1] * height];
 
@@ -27,6 +27,14 @@ define(function(){
         } else if (orientation == 'right'){
           context.fillRect(pxCoords[0] + 50, pxCoords[1] + 25, 10, 5);
         }
+      }, id: function(){
+        return id;
+      }, setCoords: function(new_coords){
+        coords = new_coords;
+      }, setOrientation: function(new_orient){
+        orientation = new_orient;
+      }, setHealth: function(new_health){
+        health = new_health;
       }
     };
   }

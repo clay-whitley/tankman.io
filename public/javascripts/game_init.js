@@ -10,6 +10,7 @@ define(["game_loop", "models/game", "networking"], function(loop, game, networki
       then = Date.now();
 
       setInterval(loop.mainLoop, 1000/game.fps);
+      networking.startTick();
     }, domInit: function(){
       var identity = readCookie('identity');
       socket.emit('identify', identity);

@@ -73,6 +73,14 @@ define(["models/game", "models/shot"], function(game, shot){
         return health;
       }, coords: function(){
         return coords;
+      }, serialize: function(){
+        return {
+          coords: coords,
+          color: color,
+          orientation: orientation,
+          speed: speed,
+          health: health
+        }
       }
     };
   }
