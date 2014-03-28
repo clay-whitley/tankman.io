@@ -1,5 +1,5 @@
 define(["/socket.io/socket.io.js", "models/game", "models/map", "models/player", "models/enemy", "models/shot"], function(socketio, game, map, player, enemy, shot){
-  socket = socketio.connect('http://localhost:8080');
+  socket = socketio.connect('ec2-54-186-174-23.us-west-2.compute.amazonaws.com');
 
   socket.on('initialSnapshot', function(data){
     for (i=0; i<data.players.length; i++){
