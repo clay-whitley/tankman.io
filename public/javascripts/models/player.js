@@ -1,4 +1,4 @@
-define(function(){
+define(["models/game"], function(game){
 
   function makePlayer(){
     var coords = [0,0];
@@ -71,6 +71,8 @@ define(function(){
         }
       }, health: function(){
         return health;
+      }, coords: function(){
+        return coords;
       }
     };
   }

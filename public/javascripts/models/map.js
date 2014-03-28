@@ -21,8 +21,8 @@ define(['./cell'], function(cell){
         }
       }, cellAtCoords: function(x,y){
         for (i=0;i<cells.length;i++){
-          if (cells[i].coords[1] == y){
-            if (cells[i].coords[0] == x){
+          if (cells[i].coords()[1] == y){
+            if (cells[i].coords()[0] == x){
               return cells[i];
             }
           }

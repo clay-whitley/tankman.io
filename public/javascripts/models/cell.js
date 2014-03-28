@@ -28,6 +28,8 @@ define(function(){
         context.fillRect(pxCoords[0], pxCoords[1], width, height);
       }, type: function(){
         return type;
+      }, coords: function(){
+        return coords;
       }
     };
   }

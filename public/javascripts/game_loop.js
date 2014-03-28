@@ -2,21 +2,21 @@ define(["models/game"], function(game){
 
   function update(modifier) {
     if (38 in keysDown) { // Player holding up
-      if (game.player.coords[1] > 0){
+      if (game.player.coords()[1] > 0){
         game.player.moveUp(modifier);    }
     }
     if (40 in keysDown) { // Player holding down
-      if (game.player.coords[1] + 50 < game.canvas.height){
+      if (game.player.coords()[1] + 50 < game.canvas.height){
         game.player.moveDown(modifier);
       }
     }
     if (37 in keysDown) { // Player holding left
-      if (game.player.coords[0] > 0){
+      if (game.player.coords()[0] > 0){
         game.player.moveLeft(modifier);
       }
     }
     if (39 in keysDown) { // Player holding right
-      if (game.player.coords[0] + 50 < game.canvas.width){
+      if (game.player.coords()[0] + 50 < game.canvas.width){
         game.player.moveRight(modifier);
       }
     }
