@@ -1,4 +1,4 @@
-define(["models/game"], function(game){
+define(["models/game", "models/shot"], function(game, shot){
 
   function makePlayer(){
     var coords = [0,0];
@@ -19,7 +19,7 @@ define(["models/game"], function(game){
         if (game.map.cellAtCoords(newCoords[0], newCoords[1]).movable()){
           coords = newCoords;
         }
-        var orientation = 'left';
+        orientation = 'left';
         pxCoords = [coords[0] * width, coords[1] * height];
       }, moveRight: function(modifier){
         var newCoords = [coords[0] + Math.floor(speed * modifier), coords[1]]
@@ -52,7 +52,7 @@ define(["models/game"], function(game){
         } else if (orientation == 'right') {
           var position = [coords[0]+1, coords[1]];
         }
-        var newShot = new Shot({coords: position, id: socket.socket.sessionid, direction: orientation});
+        var newShot = shot.create({coords: position, id: socket.socket.sessionid, direction: orientation});
         game.shots.push(newShot);
         socket.emit('newShot', newShot);
       }, takeDamage: function(amount){

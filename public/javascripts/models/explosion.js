@@ -64,11 +64,11 @@ define(["models/game"], function(game){
           cells[i].draw(context);
         }
         close();
-      };
+      }
     }
   }
 
   return {
     create: makeExplosion
-  }
+  };
 });
