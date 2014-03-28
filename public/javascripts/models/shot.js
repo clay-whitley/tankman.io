@@ -1,4 +1,4 @@
-define(['models/game', 'models/explosion'], function(game, explosion){
+define(['models/game', 'models/explosion'], function(game, explosion_module){
 
   function makeShot(opts){
     var height = game.map.pxHeight() / game.map.height();
@@ -15,11 +15,10 @@ define(['models/game', 'models/explosion'], function(game, explosion){
     return {
       draw: function(context){
         pxCoords = [coords[0] * width, coords[1] * height];
-        console.log(pxCoords, width, height);
         context.fillStyle = '#000';
         context.fillRect(pxCoords[0], pxCoords[1], width, height);
         if (timer >= 130 && !explosion){
-          explode();
+          this.explode();
         }
         if (explosion){
           explosion.draw(context);
@@ -31,7 +30,13 @@ define(['models/game', 'models/explosion'], function(game, explosion){
           radius: 4,
           shot: this
         };
-        explosion = explosion.create(opts);
+        explosion = explosion_module.create(opts);
+      }, disable: function(){
+        status = 'disabled';
+      }, explosion: function(){
+        return explosion;
+      }, status: function(){
+        return status;
       }
     }
   }

@@ -24,8 +24,8 @@ define(["models/game"], function(game){
     var activeShots = [];
 
     for (i=0;i<game.shots.length;i++){
-      if (game.shots[i].status == "disabled"){
-        delete game.shots[i].explosion;
+      if (game.shots[i].status() == "disabled"){
+        delete game.shots[i].explosion();
         delete game.shots[i]
       } else {
         activeShots.push(game.shots[i])
@@ -35,9 +35,9 @@ define(["models/game"], function(game){
     game.shots = activeShots;
 
     if (game.map){
-      for (i=0;i<game.map.cells.length;i++){
-        if (game.map.cells[i].type == "e"){
-          if (checkCollision(game.map.cells[i], game.player)){
+      for (i=0;i<game.map.cells().length;i++){
+        if (game.map.cells()[i].type() == "e"){
+          if (checkCollision(game.map.cells()[i], game.player)){
             game.player.takeDamage(10)
           }
         }

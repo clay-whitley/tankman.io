@@ -30,6 +30,8 @@ define(function(){
         return type;
       }, coords: function(){
         return coords;
+      }, setType: function(new_type){
+        type = new_type;
       }
     };
   }

@@ -15,38 +15,38 @@ define(["models/game"], function(game){
             // Up
           var c1 = game.map.cellAtCoords(center[0], center[1] - counter);
           if (c1 && !upStop) {
-            if (c1.type == "w"){
+            if (c1.type() == "w"){
               upStop = true;
             }
-            c1.type = "e";
+            c1.setType('e');
             cells.push(c1)
           }
           // Down
           var c2 = game.map.cellAtCoords(center[0], center[1] + counter);
           if (c2 && !downStop) {
-            if (c2.type == "w"){
+            if (c2.type() == "w"){
               downStop = true;
             }
-            c2.type = "e";
+            c2.setType('e');
             cells.push(c2)
           }
           // Left
           var c3 = game.map.cellAtCoords(center[0] - counter, center[1]);
           if (c3 && !leftStop) {
-            if (c3.type == "w"){
+            if (c3.type() == "w"){
               leftStop = true;
             }
-            c3.type = "e";
+            c3.setType('e');
             cells.push(c3)
           }
           // Right
           var c4 = game.map.cellAtCoords(center[0] + counter, center[1])
           if (c4 && !rightStop) {
-            if (c4.type == "w"){
+            if (c4.type() == "w"){
               rightStop = true;
 
             }
-            c4.type = "e";
+            c4.setType('e');
             cells.push(c4)
           }
         }
@@ -54,16 +54,16 @@ define(["models/game"], function(game){
       }, close: function(){
         if (counter >= 30) {
           for (i=0;i<cells.length;i++){
-            cells[i].type = "a";
+            cells[i].setType('a');
           }
-          shot.status = "disabled";
+          shot.disable();
         }
-      }, draw: function(){
-        expand();
+      }, draw: function(context){
+        this.expand();
         for (i=1;i<cells.length;i++){
           cells[i].draw(context);
         }
-        close();
+        this.close();
       }
     }
   }
