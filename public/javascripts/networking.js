@@ -1,4 +1,4 @@
-define(["/socket.io/socket.io.js", "models/game", "models/map", "models/player", "models/enemy"], function(socketio, game, map, player, enemy){
+define(["/socket.io/socket.io.js", "models/game", "models/map", "models/player", "models/enemy", "models/shot"], function(socketio, game, map, player, enemy, shot){
   socket = socketio.connect('http://localhost:8080');
 
   socket.on('initialSnapshot', function(data){
@@ -41,7 +41,7 @@ define(["/socket.io/socket.io.js", "models/game", "models/map", "models/player",
   });
 
   socket.on('newShot', function(data){
-    game.shots.push(new Shot(data));
+    game.shots.push(shot.create(data));
   });
 
   return {

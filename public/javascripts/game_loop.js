@@ -25,7 +25,7 @@ define(["models/game"], function(game){
 
     for (i=0;i<game.shots.length;i++){
       if (game.shots[i].status() == "disabled"){
-        delete game.shots[i].explosion();
+        // delete game.shots[i].explosion();
         delete game.shots[i]
       } else {
         activeShots.push(game.shots[i])

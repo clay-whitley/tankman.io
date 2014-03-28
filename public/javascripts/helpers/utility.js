@@ -50,7 +50,7 @@ addEventListener("keyup", function (e) {
 // Collision detector
 
 function checkCollision(a, b){
-  if (a.coords[0] == b.coords[0] && a.coords[1] == b.coords[1]){
+  if (a.coords()[0] == b.coords()[0] && a.coords()[1] == b.coords()[1]){
     return true;
   } else {
     return false;

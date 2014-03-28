@@ -52,9 +52,11 @@ define(["models/game", "models/shot"], function(game, shot){
         } else if (orientation == 'right') {
           var position = [coords[0]+1, coords[1]];
         }
-        var newShot = shot.create({coords: position, id: socket.socket.sessionid, direction: orientation});
-        game.shots.push(newShot);
-        socket.emit('newShot', newShot);
+        if (game.map.cellAtCoords(position[0], position[1]).movable()){
+          var newShot = shot.create({coords: position, id: socket.socket.sessionid, direction: orientation});
+          game.shots.push(newShot);
+          socket.emit('newShot', newShot.serialize());
+        }
       }, takeDamage: function(amount){
         health -= amount;
       }, draw: function(context){

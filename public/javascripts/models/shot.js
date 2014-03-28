@@ -37,6 +37,12 @@ define(['models/game', 'models/explosion'], function(game, explosion_module){
         return explosion;
       }, status: function(){
         return status;
+      }, serialize: function(){
+        return {
+          coords: coords,
+          id: id,
+          direction: direction
+        }
       }
     }
   }
