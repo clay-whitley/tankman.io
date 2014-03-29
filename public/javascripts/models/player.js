@@ -7,6 +7,7 @@ define(["models/game", "models/shot"], function(game, shot){
     // 100 px per second
     var speed = 30;
     var health = 100;
+    var isDead = false;
     var pxCoords, width, height;
 
     return {
@@ -83,6 +84,15 @@ define(["models/game", "models/shot"], function(game, shot){
           speed: speed,
           health: health
         }
+      }, die: function(){
+        isDead = true;
+        setTimeout(this.respawn, 3500)
+      }, respawn: function(){
+        isDead = false;
+        coords = [0,0];
+        pxCoords = [coords[0] * width, coords[1] * height];
+      }, isDead: function(){
+        return isDead;
       }
     };
   }
