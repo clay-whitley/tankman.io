@@ -86,6 +86,7 @@ define(["models/game", "models/shot"], function(game, shot){
         }
       }, die: function(){
         isDead = true;
+        socket.emit('playerDeath', this.serialize())
         setTimeout(this.respawn, 3500)
       }, respawn: function(){
         isDead = false;
