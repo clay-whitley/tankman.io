@@ -61,6 +61,12 @@ define(["models/game"], function(game){
     if (!game.player.isDead()){
       game.player.draw(game.context);
     }
+
+    // draw creatures
+    for (i=0; i<game.creatures.length; i++){
+      game.creatures[i].draw(game.context);
+    }
+
     // draw explosives
     for (i=0; i<game.shots.length; i++){
       game.shots[i].draw(game.context);

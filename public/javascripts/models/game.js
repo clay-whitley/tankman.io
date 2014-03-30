@@ -1,5 +1,6 @@
 define({
   fps: 30,
   players: [],
-  shots: []
+  shots: [],
+  creatures: []
 });
