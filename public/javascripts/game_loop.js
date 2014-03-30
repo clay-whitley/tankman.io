@@ -53,7 +53,9 @@ define(["models/game"], function(game){
     game.map.draw(game.context);
     // draw enemies
     for (i=0; i<game.players.length; i++){
-      game.players[i].draw(game.context);
+      if (!game.players[i].isDead()){
+        game.players[i].draw(game.context);
+      } 
     }
     // draw player
     if (!game.player.isDead()){
