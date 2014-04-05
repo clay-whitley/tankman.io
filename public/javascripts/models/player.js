@@ -8,7 +8,7 @@ define(["models/game", "models/shot"], function(game, shot){
     var speed = 30;
     var health = 100;
     var isDead = false;
-    var pxCoords, width, height;
+    var pxCoords, width, height, shotCount = 0, maxShots = 1;
 
     return {
       init: function(map){
@@ -53,9 +53,10 @@ define(["models/game", "models/shot"], function(game, shot){
         } else if (orientation == 'right') {
           var position = [coords[0]+1, coords[1]];
         }
-        if (game.map.cellAtCoords(position[0], position[1]).movable()){
+        if (game.map.cellAtCoords(position[0], position[1]).movable() && this.canShoot()){
           var newShot = shot.create({coords: position, id: socket.socket.sessionid, direction: orientation});
           game.shots.push(newShot);
+          shotCount++;
           socket.emit('newShot', newShot.serialize());
         }
       }, takeDamage: function(amount){
@@ -94,6 +95,13 @@ define(["models/game", "models/shot"], function(game, shot){
         pxCoords = [coords[0] * width, coords[1] * height];
       }, isDead: function(){
         return isDead;
+      }, canShoot: function(){
+        if (shotCount < maxShots){
+          return true;
+        }
+        return false;
+      }, closeShot: function(){
+        shotCount--;
       }
     };
   }

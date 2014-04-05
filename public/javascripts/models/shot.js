@@ -33,6 +33,7 @@ define(['models/game', 'models/explosion'], function(game, explosion_module){
         explosion = explosion_module.create(opts);
       }, disable: function(){
         status = 'disabled';
+        game.player.closeShot();
       }, explosion: function(){
         return explosion;
       }, status: function(){
