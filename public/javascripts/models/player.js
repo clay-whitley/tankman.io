@@ -1,14 +1,14 @@
 define(["models/game", "models/shot"], function(game, shot){
 
   function makePlayer(){
-    var coords = [0,0];
+    var coords = [5,5];
     var color = getRandomColor();
     var orientation = 'down';
     // 100 px per second
-    var speed = 30;
+    var speed = 0.1;
     var health = 100;
     var isDead = false;
-    var pxCoords, width, height, shotCount = 0, maxShots = 1;
+    var pxCoords, newCoords, width, height, shotCount = 0, maxShots = 1, acceptInput = false;
 
     return {
       init: function(map){
@@ -16,9 +16,13 @@ define(["models/game", "models/shot"], function(game, shot){
         height = map.pxHeight() / map.height();
         pxCoords = [coords[0] * width, coords[1] * height];
       }, moveLeft: function(modifier){
-        var newCoords = [coords[0] - Math.floor(speed * modifier), coords[1]]
-        if (game.map.cellAtCoords(newCoords[0], newCoords[1]).movable()){
-          coords = newCoords;
+        newCoords = [coords[0] - (speed * modifier), coords[1]]
+        console.log(newCoords)
+        if (Math.floor(newCoords[0]) == coords[0]-1){
+          newCoords[0] = Math.floor(newCoords[0])
+          if (game.map.cellAtCoords(newCoords[0], newCoords[1]).movable()){
+            coords = newCoords;
+          }
         }
         orientation = 'left';
         pxCoords = [coords[0] * width, coords[1] * height];
