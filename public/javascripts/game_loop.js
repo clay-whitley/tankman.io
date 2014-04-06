@@ -55,7 +55,7 @@ define(["models/game"], function(game){
     for (i=0; i<game.players.length; i++){
       if (!game.players[i].isDead()){
         game.players[i].draw(game.context);
-      } 
+      }
     }
     // draw player
     if (!game.player.isDead()){

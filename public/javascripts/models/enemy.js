@@ -13,6 +13,7 @@ define(["models/game"], function(game){
     var orientation = opts.orientation;
     var isDead = false;
     var pxCoords = [coords[0] * width, coords[1] * height];
+    var isDead = opts.isDead || false;
 
     return {
       draw: function(context){
