@@ -11,6 +11,7 @@ define(["models/game"], function(game){
     var width = game.map.pxWidth() / game.map.width();
     var height = game.map.pxHeight() / game.map.height();
     var orientation = opts.orientation;
+    var isDead = false;
     var pxCoords = [coords[0] * width, coords[1] * height];
     var isDead = opts.isDead || false;
 
