@@ -29,6 +29,11 @@ define(["/socket.io/socket.io.js", "models/game", "models/map", "models/player",
     }
   });
 
+  socket.on('pickupPowerup', function(data){
+    var cell = game.map.cellAtCoords(data[0], data[1]);
+    cell.removePowerup();
+  });
+
   socket.on('snapshot', function(data){
     for (i=0; i<data.players.length; i++){
       for (x=0; x<game.players.length; x++){

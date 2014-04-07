@@ -36,10 +36,18 @@ define(["models/game"], function(game){
 
     if (game.map){
       for (i=0;i<game.map.cells().length;i++){
-        if (game.map.cells()[i].type() == "e"){
-          if (checkCollision(game.map.cells()[i], game.player) && !game.player.isDead()){
+        var cell = game.map.cells()[i];
+        if (cell.type() == "e"){
+          if (checkCollision(cell, game.player) && !game.player.isDead()){
             game.player.takeDamage(1)
             game.player.die()
+          }
+        } else if (cell.getPowerup() && checkCollision(cell, game.player)){
+          var powerup = cell.getPowerup();
+          if (powerup.getStatus() == "active"){
+            game.player.pickup(powerup)
+          } else {
+            cell.removePowerup();
           }
         }
       }
