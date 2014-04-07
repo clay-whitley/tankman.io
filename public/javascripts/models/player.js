@@ -123,6 +123,7 @@ define(["models/game", "models/shot"], function(game, shot){
         console.log('picking up powerup ' + powerup.getName());
         powerup.disable();
         this["increment"+powerup.getProperty()](powerup.getValue());
+        socket.emit('pickupPowerup', powerup.getCoords());
       }, incrementshotRadius: function(value){
         shotRadius += value;
       }, incrementmaxShots: function(value){

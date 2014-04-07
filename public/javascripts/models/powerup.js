@@ -24,6 +24,8 @@ define(["models/game"], function(game){
         return value;
       }, setValue: function(new_value){
         value = new_value;
+      }, getCoords: function(){
+        return coords;
       }
     };
   }
