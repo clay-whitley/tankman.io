@@ -9,7 +9,7 @@ define(["models/game", "models/shot"], function(game, shot){
     var health = 100;
     var isDead = false;
     var pxCoords, newCoords, width, height, shotCount = 0, maxShots = 1, acceptInput = true,
-    shotRadius = 4;
+    shotRadius = 2;
 
     return {
       init: function(map){

@@ -43,7 +43,8 @@ define(['models/game', 'models/explosion'], function(game, explosion_module){
         return {
           coords: coords,
           id: id,
-          direction: direction
+          direction: direction,
+          radius: radius
         }
       }
     }
