@@ -5,10 +5,10 @@ define(["models/game", "models/shot"], function(game, shot){
     var color = getRandomColor();
     var orientation = 'down';
     // 100 px per second
-    var speed = 0.1;
+    var speed = 15;
     var health = 100;
     var isDead = false;
-    var pxCoords, newCoords, width, height, shotCount = 0, maxShots = 1, acceptInput = false;
+    var pxCoords, newCoords, width, height, shotCount = 0, maxShots = 1, acceptInput = true;
 
     return {
       init: function(map){
@@ -16,34 +16,46 @@ define(["models/game", "models/shot"], function(game, shot){
         height = map.pxHeight() / map.height();
         pxCoords = [coords[0] * width, coords[1] * height];
       }, moveLeft: function(modifier){
-        newCoords = [coords[0] - (speed * modifier), coords[1]]
-        console.log(newCoords)
-        if (Math.floor(newCoords[0]) == coords[0]-1){
-          newCoords[0] = Math.floor(newCoords[0])
-          if (game.map.cellAtCoords(newCoords[0], newCoords[1]).movable()){
-            coords = newCoords;
-          }
+        newCoords = [coords[0] - 1, coords[1]]
+        if (game.map.cellAtCoords(newCoords[0], newCoords[1]).movable() && acceptInput){
+          coords = newCoords;
+          acceptInput = false;
+          setTimeout(function(){
+            acceptInput = true;
+          }, 250);
         }
         orientation = 'left';
         pxCoords = [coords[0] * width, coords[1] * height];
       }, moveRight: function(modifier){
-        var newCoords = [coords[0] + Math.floor(speed * modifier), coords[1]]
-        if (game.map.cellAtCoords(newCoords[0], newCoords[1]).movable()){
+        newCoords = [coords[0] + 1, coords[1]]
+        if (game.map.cellAtCoords(newCoords[0], newCoords[1]).movable() && acceptInput){
           coords = newCoords;
+          acceptInput = false;
+          setTimeout(function(){
+            acceptInput = true;
+          }, 250);
         }
         orientation = 'right';
         pxCoords = [coords[0] * width, coords[1] * height];
       }, moveDown: function(modifier){
-        var newCoords = [coords[0], coords[1] + Math.floor(speed * modifier)]
-        if (game.map.cellAtCoords(newCoords[0], newCoords[1]).movable()){
+        var newCoords = [coords[0], coords[1] + 1]
+        if (game.map.cellAtCoords(newCoords[0], newCoords[1]).movable() && acceptInput){
           coords = newCoords;
+          acceptInput = false;
+          setTimeout(function(){
+            acceptInput = true;
+          }, 250);
         }
         orientation = 'down';
         pxCoords = [coords[0] * width, coords[1] * height];
       }, moveUp: function(modifier){
-        var newCoords = [coords[0], coords[1] - Math.floor(speed * modifier)]
-        if (game.map.cellAtCoords(newCoords[0], newCoords[1]).movable()){
+        var newCoords = [coords[0], coords[1] - 1]
+        if (game.map.cellAtCoords(newCoords[0], newCoords[1]).movable() && acceptInput){
           coords = newCoords;
+          acceptInput = false;
+          setTimeout(function(){
+            acceptInput = true;
+          }, 250);
         }
         orientation = 'up';
         pxCoords = [coords[0] * width, coords[1] * height];
