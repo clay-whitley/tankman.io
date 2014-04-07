@@ -11,6 +11,7 @@ define(['models/game', 'models/explosion'], function(game, explosion_module){
     var pxCoords = [coords[0] * width, coords[1] * height];
     var timer = 0;
     var explosion = false;
+    var radius = opts.radius;
 
     return {
       draw: function(context){
@@ -27,7 +28,7 @@ define(['models/game', 'models/explosion'], function(game, explosion_module){
       }, explode: function(){
         var opts = {
           center: coords,
-          radius: 4,
+          radius: radius,
           shot: this
         };
         explosion = explosion_module.create(opts);

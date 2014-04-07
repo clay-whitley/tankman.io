@@ -3,6 +3,9 @@ define(["models/game", "models/powerup"], function(game, powerup){
     var that = powerup.create(opts),
     color = "#00FFCC";
 
+    that.setName('Fireup');
+    that.setValue(1);
+    that.setProperty('shotRadius');
     that.getColor = function(){
       return color;
     };

@@ -27,7 +27,7 @@ define(["models/bombup", "models/fireup"], function(bombup, fireup){
 
     return {
       movable: function(){
-        if (type == "a") {
+        if (type == "a" || type == "fu" || type == "bu") {
         return true;
         } else {
         return false;
@@ -54,6 +54,11 @@ define(["models/bombup", "models/fireup"], function(bombup, fireup){
           coords: coords,
           type: type
         };
+      }, getPowerup: function(){
+        return powerup;
+      }, removePowerup: function(){
+        powerup = false;
+        type = 'a';
       }
     };
   }

@@ -8,7 +8,8 @@ define(["models/game", "models/shot"], function(game, shot){
     var speed = 15;
     var health = 100;
     var isDead = false;
-    var pxCoords, newCoords, width, height, shotCount = 0, maxShots = 1, acceptInput = true;
+    var pxCoords, newCoords, width, height, shotCount = 0, maxShots = 1, acceptInput = true,
+    shotRadius = 4;
 
     return {
       init: function(map){
@@ -70,7 +71,7 @@ define(["models/game", "models/shot"], function(game, shot){
           var position = [coords[0]+1, coords[1]];
         }
         if (game.map.cellAtCoords(position[0], position[1]).movable() && this.canShoot()){
-          var newShot = shot.create({coords: position, id: socket.socket.sessionid, direction: orientation});
+          var newShot = shot.create({coords: position, id: socket.socket.sessionid, direction: orientation, radius: shotRadius});
           game.shots.push(newShot);
           shotCount++;
           socket.emit('newShot', newShot.serialize());
@@ -118,6 +119,14 @@ define(["models/game", "models/shot"], function(game, shot){
         return false;
       }, closeShot: function(){
         shotCount--;
+      }, pickup: function(powerup){
+        console.log('picking up powerup ' + powerup.getName());
+        powerup.disable();
+        this["increment"+powerup.getProperty()](powerup.getValue());
+      }, incrementshotRadius: function(value){
+        shotRadius += value;
+      }, incrementmaxShots: function(value){
+        maxShots += value;
       }
     };
   }
