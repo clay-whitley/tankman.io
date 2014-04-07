@@ -12,20 +12,20 @@ define(["/socket.io/socket.io.js", "models/game", "models/map", "models/player",
   socket.on('mapData', function(data){
     game.map = map.create(data);
     game.player = player.create();
-    game.creatures.push(creature.create().init());
     socket.emit('newPlayer', game.player.serialize());
     game.player.init(game.map);
   });
 
   socket.on('creatures', function(data){
-    for (var creatureObj in data){
-      game.creatures.push(creature.create({coords: creatureObj.coords});
+    for (var i=0;i<data.creatures.length;i++){
+      var newCreature = creature.create({coords: data.creatures[i].coords});
+      game.creatures.push(newCreature);
     }
   });
 
   socket.on('creaturesUpdate', function(data){
-    for (var i=0; i<data.length;i++){
-      game.creatures[i].setCoords(data[i].coords);
+    for (var i=0; i<data.creatures.length;i++){
+      game.creatures[i].setCoords(data.creatures[i].coords);
     }
   });
 
