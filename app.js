@@ -10,7 +10,8 @@ var http = require('http');
 var path = require('path');
 var networking = require('./lib/networking');
 var engine = require('./lib/engine');
-var map = require('./lib/maps/sandbox_map.json')
+var map = require('./lib/maps/sandbox_map.json');
+var creature = require('./lib/models/creature');
 
 console.log(map)
 
@@ -41,4 +42,4 @@ if ('development' == app.get('env')) {
 app.get('/', routes.index);
 app.get('/users', user.list);
 
-networking.init(io, map);
+networking.init(io, map, creature);

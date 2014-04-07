@@ -17,6 +17,18 @@ define(["/socket.io/socket.io.js", "models/game", "models/map", "models/player",
     game.player.init(game.map);
   });
 
+  socket.on('creatures', function(data){
+    for (var creatureObj in data){
+      game.creatures.push(creature.create({coords: creatureObj.coords});
+    }
+  });
+
+  socket.on('creaturesUpdate', function(data){
+    for (var i=0; i<data.length;i++){
+      game.creatures[i].setCoords(data[i].coords);
+    }
+  });
+
   socket.on('snapshot', function(data){
     for (i=0; i<data.players.length; i++){
       for (x=0; x<game.players.length; x++){
