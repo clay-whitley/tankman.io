@@ -18,9 +18,14 @@ define(["models/game"], function(game){
             if (c1.type() == "w"){
               upStop = true;
               socket.emit('mapUpdate', {type: "a", coords: c1.coords()});
+              c1.setType('e');
+              cells.push(c1)
+            } else if (c1.type() == "m"){
+              upStop = true;
+            } else if (c1.type() == "a"){
+              c1.setType('e');
+              cells.push(c1);
             }
-            c1.setType('e');
-            cells.push(c1)
           }
           // Down
           var c2 = game.map.cellAtCoords(center[0], center[1] + counter);
@@ -28,9 +33,14 @@ define(["models/game"], function(game){
             if (c2.type() == "w"){
               downStop = true;
               socket.emit('mapUpdate', {type: "a", coords: c2.coords()});
+              c2.setType('e');
+              cells.push(c2)
+            } else if (c2.type() == "m"){
+              upStop = true;
+            } else if (c2.type() == "a"){
+              c2.setType('e');
+              cells.push(c2);
             }
-            c2.setType('e');
-            cells.push(c2)
           }
           // Left
           var c3 = game.map.cellAtCoords(center[0] - counter, center[1]);
@@ -38,9 +48,14 @@ define(["models/game"], function(game){
             if (c3.type() == "w"){
               leftStop = true;
               socket.emit('mapUpdate', {type: "a", coords: c3.coords()});
+              c3.setType('e');
+              cells.push(c3)
+            } else if (c3.type() == "m"){
+              leftStop = true;
+            } else if (c3.type() == "a"){
+              c3.setType('e');
+              cells.push(c3);
             }
-            c3.setType('e');
-            cells.push(c3)
           }
           // Right
           var c4 = game.map.cellAtCoords(center[0] + counter, center[1])
@@ -48,9 +63,14 @@ define(["models/game"], function(game){
             if (c4.type() == "w"){
               rightStop = true;
               socket.emit('mapUpdate', {type: "a", coords: c4.coords()});
+              c4.setType('e');
+              cells.push(c4)
+            } else if (c4.type() == "m"){
+              rightStop = true;
+            } else if (c4.type() == "a"){
+              c4.setType('e');
+              cells.push(c4);
             }
-            c4.setType('e');
-            cells.push(c4)
           }
         }
         counter++;

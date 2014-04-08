@@ -39,6 +39,8 @@ define(["models/bombup", "models/fireup"], function(bombup, fireup){
           context.fillStyle = "#ff0000";
         } else if (type == "bu" || type == "fu"){
           context.fillStyle = powerup.getColor();
+        } else if (type == "m"){
+          context.fillStyle = "aaa";
         } else {
           context.fillStyle = "#111";
         }
