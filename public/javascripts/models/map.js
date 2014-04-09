@@ -4,8 +4,8 @@ define(['./cell'], function(cell){
     var height = map_array.length;
     var width = map_array[0].length;
     var array = map_array;
-    var pxHeight = 600;
-    var pxWidth = 950;
+    var pxHeight = 750;
+    var pxWidth = 1300;
     var cells = [];
     for (y=0;y<map_array.length;y++){
       for (x=0;x<map_array[y].length; x++){

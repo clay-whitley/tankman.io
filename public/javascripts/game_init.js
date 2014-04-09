@@ -3,8 +3,8 @@ define(["game_loop", "models/game", "networking"], function(loop, game, networki
     gameInit: function(){
       game.canvas = document.createElement("canvas");
       game.context = game.canvas.getContext("2d");
-      game.canvas.width = 950;
-      game.canvas.height = 600;
+      game.canvas.width = 1300;
+      game.canvas.height = 750;
       $('body').prepend(game.canvas);
       
       then = Date.now();
