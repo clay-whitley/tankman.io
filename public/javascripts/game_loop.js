@@ -42,6 +42,11 @@ define(["models/game"], function(game){
             game.player.takeDamage(1)
             game.player.die()
           }
+          for (var i=0;i<game.creatures.length;i++){
+            if (checkCollision(cell, game.creatures[i]) && !game.creatures[i].isDead()){
+              game.creatures[i].die();
+            }
+          }
         } else if (cell.getPowerup() && checkCollision(cell, game.player)){
           var powerup = cell.getPowerup();
           if (powerup.getStatus() == "active"){
