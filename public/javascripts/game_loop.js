@@ -39,8 +39,8 @@ define(["models/game"], function(game){
         var cell = game.map.cells()[i];
         if (cell.type() == "e"){
           if (checkCollision(cell, game.player) && !game.player.isDead()){
-            game.player.takeDamage(1)
-            game.player.die()
+            game.player.takeDamage(1);
+            game.player.die();
           }
           for (var z=0;z<game.creatures.length;z++){
             if (checkCollision(cell, game.creatures[z]) && !game.creatures[z].isDead()){
@@ -54,6 +54,13 @@ define(["models/game"], function(game){
           } else {
             cell.removePowerup();
           }
+        }
+      }
+
+      for (var i=0;i<game.creatures.length;i++){
+        if (checkCollision(game.player, game.creatures[i]) && !game.player.isDead()){
+          game.player.takeDamage(1);
+          game.player.die();
         }
       }
     }
