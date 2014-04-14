@@ -42,10 +42,12 @@ define(["models/game"], function(game){
             game.player.takeDamage(1)
             game.player.die()
           }
-          for (var i=0;i<game.creatures.length;i++){
-            if (checkCollision(cell, game.creatures[i]) && !game.creatures[i].isDead()){
-              game.creatures[i].die();
+          for (var z=0;z<game.creatures.length;z++){
+            if (checkCollision(cell, game.creatures[z]) && !game.creatures[z].isDead()){
+              console.log('test')
+              game.creatures[z].die();
             }
+            console.log('foo')
           }
         } else if (cell.getPowerup() && checkCollision(cell, game.player)){
           var powerup = cell.getPowerup();
@@ -77,7 +79,9 @@ define(["models/game"], function(game){
 
     // draw creatures
     for (i=0; i<game.creatures.length; i++){
-      game.creatures[i].draw(game.context);
+      if (!game.creatures[i].isDead()){
+        game.creatures[i].draw(game.context);
+      }
     }
 
     // draw explosives

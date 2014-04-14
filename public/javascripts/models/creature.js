@@ -45,14 +45,14 @@ define(["models/game"], function(game){
         if (newCell && newCell.movable()){
           coords = newCoords;
           pxCoords = [coords[0] * width, coords[1] * height]; 
-        }, getCoords: function(){
-          return coords;
-        }, isDead: function(){
-          return isDead;
-        }, die: function(){
-          isDead = true;
-          socket.emit('creatureDeath', {coords: coords});
         }
+      }, coords: function(){
+        return coords;
+      }, isDead: function(){
+        return isDead;
+      }, die: function(){
+        isDead = true;
+        socket.emit('creatureDeath', {coords: coords});
       }
     }
   }
