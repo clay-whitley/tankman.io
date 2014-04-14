@@ -28,6 +28,10 @@ define(["game_loop", "models/game", "networking"], function(loop, game, networki
           game.player.shoot();
         }
       });
+
+      $('#reset').on('click', function(e){
+        socket.emit('reset');
+      });
     }
   };
 });

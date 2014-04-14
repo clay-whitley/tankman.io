@@ -36,7 +36,7 @@ define(["models/game"], function(game){
               c2.setType('e');
               cells.push(c2)
             } else if (c2.type() == "m"){
-              upStop = true;
+              downStop = true;
             } else if (c2.type() == "a"){
               c2.setType('e');
               cells.push(c2);
