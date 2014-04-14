@@ -7,6 +7,7 @@ define(["models/game"], function(game){
     var pxCoords = [coords[0] * width, coords[1] * height];
     var color = "#ff7b00";
     var isDead = opts.isDead || false;
+    var id = opts.id;
 
     return {
       draw: function(context){
@@ -52,7 +53,11 @@ define(["models/game"], function(game){
         return isDead;
       }, die: function(){
         isDead = true;
-        socket.emit('creatureDeath', {coords: coords});
+        socket.emit('creatureDeath', {coords: coords, id: id});
+      }, setDead: function(status){
+        isDead = status;
+      }, getId: function(){
+        return id;
       }
     }
   }

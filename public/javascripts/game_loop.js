@@ -44,10 +44,8 @@ define(["models/game"], function(game){
           }
           for (var z=0;z<game.creatures.length;z++){
             if (checkCollision(cell, game.creatures[z]) && !game.creatures[z].isDead()){
-              console.log('test')
               game.creatures[z].die();
             }
-            console.log('foo')
           }
         } else if (cell.getPowerup() && checkCollision(cell, game.player)){
           var powerup = cell.getPowerup();

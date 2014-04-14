@@ -18,7 +18,7 @@ define(["/socket.io/socket.io.js", "models/game", "models/map", "models/player",
 
   socket.on('creatures', function(data){
     for (var i=0;i<data.creatures.length;i++){
-      var newCreature = creature.create({coords: data.creatures[i].coords});
+      var newCreature = creature.create({coords: data.creatures[i].coords, id: data.creatures[i].id, isDead: data.creatures[i].isDead});
       game.creatures.push(newCreature);
     }
   });
@@ -26,6 +26,9 @@ define(["/socket.io/socket.io.js", "models/game", "models/map", "models/player",
   socket.on('creaturesUpdate', function(data){
     for (var i=0; i<data.creatures.length;i++){
       game.creatures[i].setCoords(data.creatures[i].coords);
+      if (data.creatures[i].isDead && !game.creatures[i].isDead() && data.creatures[i].id == game.creatures[i].getId()){
+        game.creatures[i].setDead(true);
+      }
     }
   });
 
