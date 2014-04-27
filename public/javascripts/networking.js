@@ -67,6 +67,12 @@ define(["/socket.io/socket.io.js", "models/game", "models/map", "models/player",
     }
   });
 
+  socket.on('pointBroadcast', function(data){
+    if (data.id == socket.socket.sessionid){
+      game.player.incrementPoints();
+    }
+  });
+
   socket.on('newShot', function(data){
     game.shots.push(shot.create(data));
   });

@@ -130,6 +130,7 @@ define(["models/game", "models/shot"], function(game, shot){
       }, incrementmaxShots: function(value){
         maxShots += value;
       }, incrementPoints: function(){
+        console.log('points incremented')
         points++;
       }, getPoints: function(){
         return points;
