@@ -10,6 +10,7 @@ define(["models/bombup", "models/fireup"], function(bombup, fireup){
     var pxCoords = [opts.coords[0] * width, opts.coords[1] * height];
     var status = "normal";
     var powerup = false;
+    var owner;
 
     if (type == "bu"){
       powerup = bombup.create({
@@ -61,6 +62,10 @@ define(["models/bombup", "models/fireup"], function(bombup, fireup){
       }, removePowerup: function(){
         powerup = false;
         type = 'a';
+      }, getOwner: function(){
+        return owner;
+      }, setOwner: function(new_owner){
+        owner = new_owner;
       }
     };
   }

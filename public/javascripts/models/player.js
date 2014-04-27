@@ -9,7 +9,7 @@ define(["models/game", "models/shot"], function(game, shot){
     var health = 100;
     var isDead = false;
     var pxCoords, newCoords, width, height, shotCount = 0, maxShots = 1, acceptInput = true,
-    shotRadius = 2;
+    shotRadius = 2, points = 0;
 
     return {
       init: function(map){
@@ -101,7 +101,8 @@ define(["models/game", "models/shot"], function(game, shot){
           orientation: orientation,
           speed: speed,
           health: health,
-          isDead: isDead
+          isDead: isDead,
+          points: points
         }
       }, die: function(){
         isDead = true;
@@ -128,6 +129,10 @@ define(["models/game", "models/shot"], function(game, shot){
         shotRadius += value;
       }, incrementmaxShots: function(value){
         maxShots += value;
+      }, incrementPoints: function(){
+        points++;
+      }, getPoints: function(){
+        return points;
       }
     };
   }

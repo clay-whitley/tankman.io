@@ -39,12 +39,16 @@ define(["models/game"], function(game){
         var cell = game.map.cells()[i];
         if (cell.type() == "e"){
           if (checkCollision(cell, game.player) && !game.player.isDead()){
+            console.log("player with id got a kill", cell.getOwner());
             game.player.takeDamage(1);
             game.player.die();
+            socket.emit('playerPoint', {id: cell.getOwner()});
           }
           for (var z=0;z<game.creatures.length;z++){
             if (checkCollision(cell, game.creatures[z]) && !game.creatures[z].isDead()){
+              console.log("player with id got a creature kill", cell.getOwner());
               game.creatures[z].die();
+              socket.emit('playerPoint', {id: cell.getOwner()});
             }
           }
         } else if (cell.getPowerup() && checkCollision(cell, game.player)){

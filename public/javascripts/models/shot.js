@@ -45,7 +45,9 @@ define(['models/game', 'models/explosion'], function(game, explosion_module){
           id: id,
           direction: direction,
           radius: radius
-        }
+        };
+      }, getOwner: function(){
+        return id;
       }
     }
   }

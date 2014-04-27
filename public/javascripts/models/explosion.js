@@ -19,11 +19,13 @@ define(["models/game"], function(game){
               upStop = true;
               socket.emit('mapUpdate', {type: "a", coords: c1.coords()});
               c1.setType('e');
+              c1.setOwner(shot.getOwner())
               cells.push(c1)
             } else if (c1.type() == "m"){
               upStop = true;
             } else if (c1.type() == "a"){
               c1.setType('e');
+              c1.setOwner(shot.getOwner())
               cells.push(c1);
             }
           }
@@ -34,11 +36,13 @@ define(["models/game"], function(game){
               downStop = true;
               socket.emit('mapUpdate', {type: "a", coords: c2.coords()});
               c2.setType('e');
+              c2.setOwner(shot.getOwner())
               cells.push(c2)
             } else if (c2.type() == "m"){
               downStop = true;
             } else if (c2.type() == "a"){
               c2.setType('e');
+              c2.setOwner(shot.getOwner())
               cells.push(c2);
             }
           }
@@ -49,11 +53,13 @@ define(["models/game"], function(game){
               leftStop = true;
               socket.emit('mapUpdate', {type: "a", coords: c3.coords()});
               c3.setType('e');
+              c3.setOwner(shot.getOwner());
               cells.push(c3)
             } else if (c3.type() == "m"){
               leftStop = true;
             } else if (c3.type() == "a"){
               c3.setType('e');
+              c3.setOwner(shot.getOwner())
               cells.push(c3);
             }
           }
@@ -64,11 +70,13 @@ define(["models/game"], function(game){
               rightStop = true;
               socket.emit('mapUpdate', {type: "a", coords: c4.coords()});
               c4.setType('e');
+              c4.setOwner(shot.getOwner());
               cells.push(c4)
             } else if (c4.type() == "m"){
               rightStop = true;
             } else if (c4.type() == "a"){
               c4.setType('e');
+              c4.setOwner(shot.getOwner());
               cells.push(c4);
             }
           }

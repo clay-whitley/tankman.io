@@ -49,6 +49,7 @@ define(["/socket.io/socket.io.js", "models/game", "models/map", "models/player",
           game.players[x].setOrientation(data.players[i].orientation);
           game.players[x].setHealth(data.players[i].health);
           game.players[x].setDead(data.players[i].isDead);
+          game.players[x].setPoints(data.players[i].points);
         }
       }
     }
