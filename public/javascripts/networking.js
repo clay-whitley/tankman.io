@@ -10,13 +10,7 @@ define(["/socket.io/socket.io.js", "models/game", "models/map", "models/player",
   });
 
   socket.on('reset', function(data){
-    console.log('game resetting', data);
-    game.map = map.create(data.map);
-    game.creatures = [];
-    for (var i=0;i<data.creatures.length;i++){
-      var newCreature = creature.create({coords: data.creatures[i].coords, id: data.creatures[i].id, isDead: data.creatures[i].isDead});
-      game.creatures.push(newCreature);
-    }
+    document.location.href = "/";
   });
 
   socket.on('mapData', function(data){
