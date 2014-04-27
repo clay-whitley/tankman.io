@@ -102,6 +102,7 @@ define(["models/game"], function(game){
     game.context.fillStyle = "blue";
     game.context.font = "bold 16px Arial";
     game.context.fillText("Health:" + game.player.health().toString(), game.canvas.width-100, 20);
+    game.context.fillText("Points:" + game.player.getPoints().toString(), game.canvas.width-200, 20);
   }
 
   function mainLoop() {
