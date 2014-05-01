@@ -9,7 +9,7 @@ define(["models/game", "models/shot"], function(game, shot){
     var health = 100;
     var isDead = false;
     var pxCoords, newCoords, width, height, shotCount = 0, maxShots = 1, acceptInput = true,
-    shotRadius = 2, points = 0;
+    shotRadius = 2, points = 0, name = readCookie('identity');
 
     return {
       init: function(map){
@@ -90,8 +90,8 @@ define(["models/game", "models/shot"], function(game, shot){
         } else if (orientation == 'right'){
           context.fillRect(pxCoords[0] + width, pxCoords[1] + (height/2), 10, 5);
         }
-        context.fillStyle = "#000"
-        context.fillText("test name", pxCoords[0], pxCoords[1]-6);
+        context.fillStyle = "#000";
+        context.fillText(name, pxCoords[0], pxCoords[1]-6);
       }, health: function(){
         return health;
       }, coords: function(){
@@ -104,7 +104,8 @@ define(["models/game", "models/shot"], function(game, shot){
           speed: speed,
           health: health,
           isDead: isDead,
-          points: points
+          points: points,
+          name: name
         }
       }, die: function(){
         isDead = true;

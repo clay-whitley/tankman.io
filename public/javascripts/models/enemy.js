@@ -14,6 +14,7 @@ define(["models/game"], function(game){
     var pxCoords = [coords[0] * width, coords[1] * height];
     var isDead = opts.isDead || false;
     var points = opts.points || 0;
+    var name = opts.name;
 
     return {
       draw: function(context){
@@ -29,6 +30,8 @@ define(["models/game"], function(game){
         } else if (orientation == 'right'){
           context.fillRect(pxCoords[0] + 50, pxCoords[1] + 25, 10, 5);
         }
+        context.fillStyle = "#000";
+        context.fillText(name, pxCoords[0], pxCoords[1]-6);
       }, id: function(){
         return id;
       }, setCoords: function(new_coords){
