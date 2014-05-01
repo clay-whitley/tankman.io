@@ -90,6 +90,8 @@ define(["models/game", "models/shot"], function(game, shot){
         } else if (orientation == 'right'){
           context.fillRect(pxCoords[0] + width, pxCoords[1] + (height/2), 10, 5);
         }
+        context.fillStyle = "#000"
+        context.fillText("test name", pxCoords[0], pxCoords[1]-6);
       }, health: function(){
         return health;
       }, coords: function(){
